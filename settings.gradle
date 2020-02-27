@@ -1,0 +1,2 @@
+rootProject.name='SmokeTracker_Weber_Favez'
+include ':app'

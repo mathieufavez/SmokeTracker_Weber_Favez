@@ -9,7 +9,7 @@
         android:roundIcon="@drawable/logoicone"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
-        <activity android:name=".TrackingActivity"></activity>
+        <activity android:name=".TrackingActivity"/>
         <activity android:name=".HomeActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

@@ -19,6 +19,8 @@
         android:text="Fill up your information !"
         android:textAlignment="center"
         />
+
+
     <EditText
         android:id="@+id/edit_lastname_input"
         android:layout_width="match_parent"
@@ -26,6 +28,7 @@
         android:layout_margin="15dp"
         android:hint="Lastname"
         android:textSize="18dp"
+        android:textColor="@color/colorWhite"
         android:textColorHint="@color/colorWhite"
         android:inputType="textLongMessage"
         />
@@ -34,9 +37,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-
         android:hint="Firstname"
         android:textSize="18dp"
+        android:textColor="@color/colorWhite"
         android:textColorHint="@color/colorWhite"
         android:inputType="textLongMessage"
         />
@@ -45,9 +48,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-
         android:hint="Brand"
         android:textSize="18dp"
+        android:textColor="@color/colorWhite"
         android:textColorHint="@color/colorWhite"
         android:inputType="textLongMessage"
         />
@@ -56,9 +59,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-
         android:hint="Packet price"
         android:textSize="18dp"
+        android:textColor="@color/colorWhite"
         android:textColorHint="@color/colorWhite"
         android:inputType="numberDecimal"
         />
@@ -69,6 +72,7 @@
         android:layout_margin="15dp"
         android:hint="Quantity per packet"
         android:textSize="18dp"
+        android:textColor="@color/colorWhite"
         android:textColorHint="@color/colorWhite"
         android:inputType="number"
         />
@@ -79,10 +83,12 @@
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
         android:hint="Cigarettes smoked per day"
-        android:inputType="number"
-        android:textAppearance="@color/colorWhite"
+        android:textSize="18dp"
+        android:textColor="@color/colorWhite"
         android:textColorHint="@color/colorWhite"
-        android:textSize="18dp" />
+        android:inputType="number" />
+
+
     <Button
         android:id="@+id/button_next_homeActivity"
         android:layout_gravity="center"

@@ -1,11 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TrackingActivity">
+    tools:context=".TrackingActivity"
+    android:orientation="vertical"
+    android:background="@drawable/blackbackground">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:padding="10dp"
+        android:textColor="@color/colorWhite"
+        android:text="Tracking"
+        android:textAlignment="center"
+        android:textSize="25dp"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="10dp"
+        android:layout_margin="15dp"
+        android:textColor="@color/colorWhite"
+        android:text="Day X"
+        android:textAlignment="center"
+        android:textSize="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="10dp"
+        android:layout_margin="15dp"
+        android:textColor="@color/colorWhite"
+        android:text="X"
+        android:textAlignment="center"
+        android:textSize="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="10dp"
+        android:layout_margin="15dp"
+        android:textColor="@color/colorWhite"
+        android:text="cigarettes left"
+        android:textAlignment="center"
+        android:textSize="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="10dp"
+        android:layout_margin="15dp"
+        android:textColor="@color/colorWhite"
+        android:text="smoked"
+        android:textAlignment="center"
+        android:textSize="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="10dp"
+        android:layout_margin="15dp"
+        android:textColor="@color/colorWhite"
+        android:text="craved"
+        android:textAlignment="center"
+        android:textSize="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="10dp"
+        android:layout_margin="15dp"
+        android:textColor="@color/colorWhite"
+        android:text="CHF spent"
+        android:textAlignment="center"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/button_i_smoked"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_gravity="left"
+        android:background="@drawable/myborder"
+        android:text="I smoked"
+        />
+
+    <Button
+        android:id="@+id/button_i_craved"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="25dp"
+        android:layout_gravity="right"
+        android:background="@drawable/myborder"
+        android:text="I craved"
+        />
 </LinearLayout>

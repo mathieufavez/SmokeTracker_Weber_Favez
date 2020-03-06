@@ -3,13 +3,170 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/lightsilverbackground"
     >
 
     <TextView
+        android:id="@+id/tracking_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:padding="10dp"
+        android:textColor="@color/colorBlack"
+        android:text="Tracking"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textSize="25sp"/>
+
+    <TextView
+        android:id="@+id/day_textView"
+        android:layout_below="@id/tracking_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tracking Fragment"
-        android:textSize="30sp"
+        android:layout_gravity="center"
+        android:padding="10dp"
         android:layout_centerInParent="true"
+        android:textColor="@color/colorBlack"
+        android:text="Day X"
+        android:textAlignment="center"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/x_cigarettes_left_textView"
+        android:layout_below="@id/day_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="5dp"
+        android:layout_marginTop="30dp"
+        android:layout_centerInParent="true"
+        android:textColor="@color/colorBlack"
+        android:text="X"
+        android:textAlignment="center"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/cigarettes_left_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="5dp"
+        android:layout_marginBottom="80dp"
+        android:layout_below="@id/x_cigarettes_left_textView"
+        android:layout_centerInParent="true"
+        android:textColor="@color/colorBlack"
+        android:text="cigarettes left"
+        android:textAlignment="center"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/smoked_value"
+        android:layout_width="35dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="47dp"
+        android:layout_marginTop="15dp"
+        android:layout_below="@id/cigarettes_left_textView"
+        android:textColor="@color/colorBlack"
+        android:text="10"
+        android:textAlignment="center"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/smoked_textView"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="10dp"
+        android:layout_marginStart="15dp"
+        android:layout_below="@id/smoked_value"
+        android:textColor="@color/colorBlack"
+        android:text="smoked"
+        android:textAlignment="center"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/craved_value"
+        android:layout_width="35dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:layout_below="@id/cigarettes_left_textView"
+        android:layout_centerInParent="true"
+        android:textColor="@color/colorBlack"
+        android:text="0"
+        android:textAlignment="center"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/craved_textView"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="10dp"
+        android:layout_below="@id/craved_value"
+        android:layout_centerInParent="true"
+        android:textColor="@color/colorBlack"
+        android:text="craved"
+        android:textAlignment="center"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/chf_spent_value"
+        android:layout_width="35dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="47dp"
+        android:layout_below="@id/cigarettes_left_textView"
+        android:layout_alignParentEnd="true"
+        android:textColor="@color/colorBlack"
+        android:text="0"
+        android:textAlignment="center"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/chf_spent_textView"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="10dp"
+       android:layout_marginEnd="15dp"
+        android:layout_below="@id/chf_spent_value"
+        android:layout_alignParentEnd="true"
+        android:textColor="@color/colorBlack"
+        android:text="spent"
+        android:textAlignment="center"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/button_i_smoked"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="110dp"
+        android:layout_marginStart="35dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/smoked_textView"
+        android:background="@drawable/myborder"
+        android:text="I smoked"
+        android:padding="10dp"
+        android:textSize="20sp"
         />
+
+    <Button
+        android:id="@+id/button_i_craved"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="110dp"
+        android:layout_marginRight="35dp"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/smoked_textView"
+        android:background="@drawable/myborder"
+        android:text="I craved"
+        android:padding="10dp"
+        android:textSize="20sp"
+        />
+
+
+
 </RelativeLayout>

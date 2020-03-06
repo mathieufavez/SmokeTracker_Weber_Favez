@@ -35,13 +35,13 @@ public class HomeActivity extends AppCompatActivity {
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isEmpty(lastname) || isEmpty(firstname) || isEmpty(brand) || isEmpty(packetPrice) || isEmpty(quantityPerPacket) || isEmpty(cigarettesSmokedPerDay)) {
+                //if (isEmpty(lastname) || isEmpty(firstname) || isEmpty(brand) || isEmpty(packetPrice) || isEmpty(quantityPerPacket) || isEmpty(cigarettesSmokedPerDay)) {
                    Toast.makeText(HomeActivity.this, "Please fill up all the fields", Toast.LENGTH_LONG).show();
-                }
-                else{
+                //}
+               // else{
                     Intent trackingActivityIntent = new Intent(HomeActivity.this, TrackingActivity.class);
                     startActivity(trackingActivityIntent);
-                }
+               // }
 
             }
         });

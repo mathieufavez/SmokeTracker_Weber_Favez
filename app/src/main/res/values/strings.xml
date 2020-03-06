@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SMOKE TRACKER</string>
+    <string name="app_name">Smoke Tracker</string>
     <string name="bottom_navigation_menu_tracking">Tracking</string>
     <string name="bottom_navigation_menu_history">History</string>
     <string name="bottom_navigation_menu_stats">Stats</string>

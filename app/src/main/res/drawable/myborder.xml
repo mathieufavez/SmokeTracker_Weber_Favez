@@ -15,7 +15,7 @@
 
     <!-- Contour -->
     <corners
-        android:radius="10dp"   >
+        android:radius="30dp"   >
     </corners>
 
 </shape>

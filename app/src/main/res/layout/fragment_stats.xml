@@ -6,10 +6,158 @@
     android:background="@drawable/lightsilverbackground">
 
     <TextView
+        android:id="@+id/stats_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:padding="10dp"
+        android:textColor="@color/colorBlack"
+        android:text="Stats"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textSize="25sp"/>
+
+    <TextView
+        android:id="@+id/sinceday_textView"
+        android:layout_below="@id/stats_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Stats Fragment"
-        android:textSize="30sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
         android:layout_centerInParent="true"
-        />
+        android:textColor="@color/colorBlack"
+        android:text="Since date"
+        android:textAlignment="center"
+        android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/totalsmoked_value"
+        android:layout_below="@id/sinceday_textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="35dp"
+        android:textStyle="bold"
+        android:textColor="@color/colorBlack"
+        android:text="0"
+        android:textSize="20sp" />
+    <TextView
+        android:id="@+id/totalsmoked_textView"
+        android:layout_below="@id/totalsmoked_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:textColor="@color/colorBlack"
+        android:text="cigarettes smoked"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/totalcraved_value"
+        android:layout_below="@id/totalsmoked_textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="35dp"
+        android:textStyle="bold"
+        android:textColor="@color/colorBlack"
+        android:text="0"
+        android:textSize="20sp" />
+    <TextView
+        android:id="@+id/totalcraved_textView"
+        android:layout_below="@id/totalcraved_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:textColor="@color/colorBlack"
+        android:text="cigarettes craved"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/totalspent_value"
+        android:layout_below="@id/totalcraved_textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="35dp"
+        android:textStyle="bold"
+        android:textColor="@color/colorBlack"
+        android:text="0"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/totalspent_textView"
+        android:layout_below="@id/totalspent_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:textColor="@color/colorBlack"
+        android:text="CHF spent"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/avgsmoked_value"
+        android:layout_below="@id/totalspent_textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="35dp"
+        android:textStyle="bold"
+        android:textColor="@color/colorBlack"
+        android:text="0"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/avgsmoked_textView"
+        android:layout_below="@id/avgsmoked_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:textColor="@color/colorBlack"
+        android:text="cigarettes smoked per day"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/avgcraved_value"
+        android:layout_below="@id/avgsmoked_textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="35dp"
+        android:textStyle="bold"
+        android:textColor="@color/colorBlack"
+        android:text="0"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/avgcraved_textView"
+        android:layout_below="@id/avgcraved_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:textColor="@color/colorBlack"
+        android:text="cigarettes craved per day"
+        android:textSize="18sp" />
+
+
 </RelativeLayout>

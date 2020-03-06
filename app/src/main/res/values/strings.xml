@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">SMOKE TRACKER</string>
+    <string name="bottom_navigation_menu_tracking">Tracking</string>
+    <string name="bottom_navigation_menu_history">History</string>
+    <string name="bottom_navigation_menu_stats">Stats</string>
+    <string name="bottom_navigation_menu_account">Account</string>
 </resources>

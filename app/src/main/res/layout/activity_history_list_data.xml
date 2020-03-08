@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".History_list_data_Activity"
+    android:background="@drawable/lightsilverbackground">
+
+    <TextView
+        android:id="@+id/date_history_day"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:padding="10dp"
+        android:textColor="@color/colorBlack"
+        android:text="Date"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textSize="25sp"/>
+
+    <TextView
+        android:id="@+id/smoked_value"
+        android:layout_width="35dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="47dp"
+        android:layout_marginTop="50dp"
+        android:layout_below="@id/date_history_day"
+        android:textStyle="bold"
+        android:textColor="@color/colorBlack"
+        android:text="10"
+        android:textAlignment="center"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/smoked_textView"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="10dp"
+        android:layout_marginStart="15dp"
+        android:layout_below="@id/smoked_value"
+        android:textColor="@color/colorBlack"
+        android:text="smoked"
+        android:textAlignment="center"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/craved_value"
+        android:layout_width="35dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:layout_below="@id/date_history_day"
+        android:layout_centerInParent="true"
+        android:textStyle="bold"
+        android:textColor="@color/colorBlack"
+        android:text="0"
+        android:textAlignment="center"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/craved_textView"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="10dp"
+        android:layout_below="@id/craved_value"
+        android:layout_centerInParent="true"
+        android:textColor="@color/colorBlack"
+        android:text="craved"
+        android:textAlignment="center"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/chf_spent_value"
+        android:layout_width="35dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="47dp"
+        android:layout_below="@id/date_history_day"
+        android:layout_alignParentEnd="true"
+        android:textStyle="bold"
+        android:textColor="@color/colorBlack"
+        android:text="0"
+        android:textAlignment="center"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/chf_spent_textView"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="10dp"
+        android:layout_marginEnd="15dp"
+        android:layout_below="@id/chf_spent_value"
+        android:layout_alignParentEnd="true"
+        android:textColor="@color/colorBlack"
+        android:text="spent"
+        android:textAlignment="center"
+        android:textSize="20sp" />
+
+    <ListView
+        android:id="@+id/smoked_craved_listview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/smoked_textView"
+        android:layout_marginTop="50dp"
+        />
+
+
+
+
+    </RelativeLayout>

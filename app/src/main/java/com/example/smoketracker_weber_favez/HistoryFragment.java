@@ -1,5 +1,6 @@
 package com.example.smoketracker_weber_favez;
 
+import android.content.Intent;
 import android.os.Bundle;
 import java.lang.*;
 
@@ -86,7 +87,9 @@ public class HistoryFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getActivity(), days.get(position),Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), days.get(position),Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getContext(),History_list_data_Activity.class);
+                startActivity(intent);
             }
         });
         return view;

@@ -13,6 +13,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Delay the launch of the app to see the logo
         new Handler().postDelayed(new Runnable(){
             @Override
             public void run(){

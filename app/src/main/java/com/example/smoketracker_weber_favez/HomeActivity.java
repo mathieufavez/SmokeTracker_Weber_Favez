@@ -35,10 +35,12 @@ public class HomeActivity extends AppCompatActivity {
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Check if the fields are empty or not
                 //if (isEmpty(lastname) || isEmpty(firstname) || isEmpty(brand) || isEmpty(packetPrice) || isEmpty(quantityPerPacket) || isEmpty(cigarettesSmokedPerDay)) {
                    Toast.makeText(HomeActivity.this, "Please fill up all the fields", Toast.LENGTH_LONG).show();
                 //}
                // else{
+                //Launch the next activity
                     Intent trackingActivityIntent = new Intent(HomeActivity.this, TrackingActivity.class);
                     startActivity(trackingActivityIntent);
                // }
@@ -47,6 +49,7 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
+    //Method to see if a editText is empty. Return true if it is empty
     private boolean isEmpty(EditText myeditText) {
         return myeditText.getText().toString().trim().length() == 0;
     }

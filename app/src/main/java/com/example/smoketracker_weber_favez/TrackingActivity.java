@@ -11,17 +11,21 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class TrackingActivity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tracking);
 
+        //Add the listener for the bottom navigation bar
         BottomNavigationView bottomNavigationView = findViewById(R.id.activity_tracking_bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
 
+        //Launch directly the Tracking Fragment when we arrive on Tracking Activity
         getSupportFragmentManager().beginTransaction().replace(R.id.activity_tracking_frame_layout, new TrackingFragment()).commit();
     }
 
+    //To set the clicks on the bottom navigation bar
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override

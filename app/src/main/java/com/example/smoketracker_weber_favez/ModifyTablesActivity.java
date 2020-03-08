@@ -25,7 +25,7 @@ public class ModifyTablesActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Launch the next activity
-                Intent userIntent = new Intent(ModifyTablesActivity.this, HomeActivity.class);
+                Intent userIntent = new Intent(ModifyTablesActivity.this, ModifyUserActivity.class);
                 startActivity(userIntent);
                 // }
 
@@ -39,7 +39,7 @@ public class ModifyTablesActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Launch the next activity
-                Intent dayIntent = new Intent(ModifyTablesActivity.this, HomeActivity.class);
+                Intent dayIntent = new Intent(ModifyTablesActivity.this, ModifyDayActivity.class);
                 startActivity(dayIntent);
                 // }
 

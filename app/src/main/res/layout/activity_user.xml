@@ -7,40 +7,49 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/lightsilverbackground"
     android:orientation="vertical"
-    tools:context=".ModifyTablesActivity">
+    tools:context=".ModifyUserActivity">
 
 
     <TextView
-        android:id="@+id/modify_tables_text_view"
+        android:id="@+id/modify_user_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
         android:padding="10dp"
-        android:text="Modify Tables"
+        android:text="Modify User"
         android:textAlignment="center"
         android:textColor="@color/colorBlack"
         android:textSize="25sp"
         android:textStyle="bold" />
 
         <Button
-            android:id="@+id/button_user"
+            android:id="@+id/button_user_show"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:background="@drawable/myborder"
-            android:layout_gravity="center"
-            android:layout_marginTop="190dp"
             android:layout_marginBottom="25dp"
-            android:text="user"
+            android:layout_marginTop="175dp"
+            android:layout_gravity="center"
+            android:text="show"
             />
 
         <Button
-            android:id="@+id/button_day"
+            android:id="@+id/button_user_add"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/myborder"
+            android:layout_marginBottom="25dp"
+            android:layout_gravity="center"
+            android:text="add"
+            />
+        <Button
+            android:id="@+id/button_user_delete"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:background="@drawable/myborder"
             android:layout_gravity="center"
-            android:layout_marginBottom="25dp"
-            android:text="day"
+            android:text="delete"
             />
 
-</LinearLayout>
+
+    </LinearLayout>

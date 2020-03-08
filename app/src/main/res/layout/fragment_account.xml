@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/lightsilverbackground"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical">
 
     <TextView
@@ -19,39 +20,34 @@
         android:textSize="25sp"
         android:textStyle="bold" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/lightsilverbackground"
-        android:orientation="vertical"
-        android:gravity="center">
-
 
     <Button
         android:id="@+id/button_modify"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/myborder"
+        android:layout_marginTop="175dp"
         android:layout_marginBottom="25dp"
-        android:text="modify"
-        />
+        android:background="@drawable/myborder"
+        android:layout_gravity="center"
+        android:text="modify" />
 
     <Button
         android:id="@+id/button_start_over"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:background="@drawable/myborder"
+        android:layout_gravity="center"
         android:layout_marginBottom="25dp"
         android:text="start over"
         />
 
     <Button
         android:id="@+id/button_modify_tables"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:background="@drawable/myborder"
+        android:layout_gravity="center"
         android:text="modify tables"
         />
 
     </LinearLayout>
-</RelativeLayout>

@@ -12,8 +12,15 @@
         <activity android:name=".History_list_data_Activity"/>
         <activity android:name=".TrackingActivity" />
         <activity android:name=".HomeActivity" />
-        <activity android:name=".AccountActivity" />
         <activity android:name=".ModifyTablesActivity" />
+        <activity android:name=".ModifyUserActivity" />
+        <activity android:name=".ModifyDayActivity" />
+        <activity android:name=".AddDayActivity" />
+        <activity android:name=".AddUserActivity" />
+        <activity android:name=".DeleteDayActivity" />
+        <activity android:name=".DeleteUserActivity" />
+        <activity android:name=".ShowDayActivity" />
+        <activity android:name=".ShowUserActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -8,6 +8,7 @@
     android:orientation="vertical"
     tools:context=".ModifyTablesActivity">
 
+
     <TextView
         android:id="@+id/modify_tables_text_view"
         android:layout_width="match_parent"

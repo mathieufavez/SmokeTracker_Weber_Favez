@@ -9,9 +9,11 @@
         android:roundIcon="@drawable/logoicone"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
-        <activity android:name=".History_list_data_Activity"></activity>
+        <activity android:name=".History_list_data_Activity"/>
         <activity android:name=".TrackingActivity" />
         <activity android:name=".HomeActivity" />
+        <activity android:name=".AccountActivity" />
+        <activity android:name=".ModifyTablesActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

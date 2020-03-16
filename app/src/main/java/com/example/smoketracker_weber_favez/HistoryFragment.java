@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
@@ -38,13 +39,14 @@ public class HistoryFragment extends Fragment {
         final HashMap<String, String> dayDates = new HashMap<>();
 
         //Dates Array
-        List<String> dateList = new ArrayList<String>();
+        List<String> dateList = new ArrayList<>();
         Calendar calendar = Calendar.getInstance();
         for (int i=0; i<31; i++) {
             calendar.add(Calendar.DATE, 1);
             SimpleDateFormat curFormater = new SimpleDateFormat("EEEE, MMMM dd, yyyy");
             dateList.add(curFormater.format(calendar.getTime()));
         }
+
 
         //Days Array
         final List<String> days = new ArrayList<>();
@@ -55,12 +57,6 @@ public class HistoryFragment extends Fragment {
             day1++;
         }
 
-        TreeMap <String,String> sortedDayDates = new TreeMap<>(dayDates);
-        sortedDayDates.putAll(dayDates);
-        Log.d("Daydates : ",sortedDayDates.toString());
-
-
-
         //set the adapter
         final List<HashMap<String, String>> listItems = new ArrayList<>();
         SimpleAdapter adapter = new SimpleAdapter(getActivity(),
@@ -68,7 +64,6 @@ public class HistoryFragment extends Fragment {
                 R.layout.fragment_history_list_item,
                 new String[]{"First line","Second line"},
                 new int[]{R.id.text1_list_item, R.id.text2_list_item});
-
 
         //Put the values for the listview
         Iterator it = dayDates.entrySet().iterator();
@@ -80,14 +75,12 @@ public class HistoryFragment extends Fragment {
             listItems.add(resultsMap);
         }
 
-
         listView.setFastScrollEnabled(true);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Toast.makeText(getActivity(), days.get(position),Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getContext(),History_list_data_Activity.class);
                 startActivity(intent);
             }

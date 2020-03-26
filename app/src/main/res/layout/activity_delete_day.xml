@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/lightsilverbackground"
     android:orientation="vertical"
-    tools:context=".DeleteDayActivity">
+    tools:context=".smoketracker.ui.DeleteDayActivity">
 
 
     <TextView

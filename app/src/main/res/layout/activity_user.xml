@@ -7,7 +7,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/lightsilverbackground"
     android:orientation="vertical"
-    tools:context=".ModifyUserActivity">
+    tools:context=".smoketracker.ui.ModifyUserActivity">
 
 
     <TextView

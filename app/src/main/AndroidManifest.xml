@@ -9,19 +9,21 @@
         android:roundIcon="@drawable/logoicone"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
-        <activity android:name=".History_list_data_Activity"/>
-        <activity android:name=".TrackingActivity" />
-        <activity android:name=".HomeActivity" />
-        <activity android:name=".ModifyTablesActivity" />
-        <activity android:name=".ModifyUserActivity" />
-        <activity android:name=".ModifyDayActivity" />
-        <activity android:name=".AddDayActivity" />
-        <activity android:name=".AddUserActivity" />
-        <activity android:name=".DeleteDayActivity" />
-        <activity android:name=".DeleteUserActivity" />
-        <activity android:name=".ShowDayActivity" />
-        <activity android:name=".ShowUserActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".smoketracker.ui.Login_activity"/>
+        <activity android:name=".smoketracker.ui.LoginMenuActivity" />
+        <activity android:name=".smoketracker.ui.History_list_data_Activity" />
+        <activity android:name=".smoketracker.ui.TrackingActivity" />
+        <activity android:name=".smoketracker.ui.HomeActivity" />
+        <activity android:name=".smoketracker.ui.ModifyTablesActivity" />
+        <activity android:name=".smoketracker.ui.ModifyUserActivity" />
+        <activity android:name=".smoketracker.ui.ModifyDayActivity" />
+        <activity android:name=".smoketracker.ui.AddDayActivity" />
+        <activity android:name=".smoketracker.ui.AddUserActivity" />
+        <activity android:name=".smoketracker.ui.DeleteDayActivity" />
+        <activity android:name=".smoketracker.ui.DeleteUserActivity" />
+        <activity android:name=".smoketracker.ui.ShowDayActivity" />
+        <activity android:name=".smoketracker.ui.ShowUserActivity" />
+        <activity android:name=".smoketracker.ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

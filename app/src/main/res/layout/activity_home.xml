@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeActivity"
+    tools:context=".smoketracker.ui.HomeActivity"
     android:orientation="vertical"
     android:background="@drawable/lightsilverbackground">
 
@@ -25,7 +25,7 @@
         android:id="@+id/edit_lastname_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
+        android:layout_margin="7dp"
         android:hint="Lastname"
         android:textSize="18dp"
         android:textColor="@color/colorBlack"
@@ -37,7 +37,7 @@
         android:id="@+id/edit_firstname_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
+        android:layout_margin="7dp"
         android:hint="Firstname"
         android:textSize="18dp"
         android:textColor="@color/colorBlack"
@@ -45,11 +45,38 @@
         android:backgroundTint="@android:color/black"
         android:inputType="textLongMessage"
         />
+
+    <EditText
+        android:id="@+id/edit_email_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="7dp"
+        android:hint="Password"
+        android:textSize="18dp"
+        android:textColor="@color/colorBlack"
+        android:textColorHint="@color/colorGreyLight"
+        android:backgroundTint="@android:color/black"
+        android:inputType="textPassword"
+        />
+
+    <EditText
+        android:id="@+id/edit_password_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="7dp"
+        android:hint="Email"
+        android:textSize="18dp"
+        android:textColor="@color/colorBlack"
+        android:textColorHint="@color/colorGreyLight"
+        android:backgroundTint="@android:color/black"
+        android:inputType="textLongMessage"
+        />
+
     <EditText
         android:id="@+id/edit_brand_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
+        android:layout_margin="7dp"
         android:hint="Brand"
         android:textSize="18dp"
         android:textColor="@color/colorBlack"
@@ -61,7 +88,7 @@
         android:id="@+id/edit_packetprice_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
+        android:layout_margin="7dp"
         android:hint="Packet price"
         android:textSize="18dp"
         android:textColor="@color/colorBlack"
@@ -73,7 +100,7 @@
         android:id="@+id/edit_quantityperpacket_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
+        android:layout_margin="7dp"
         android:hint="Quantity per packet"
         android:textSize="18dp"
         android:textColor="@color/colorBlack"
@@ -86,7 +113,7 @@
         android:id="@+id/edit_smokeperday_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
+        android:layout_margin="7dp"
         android:hint="Cigarettes smoked per day"
         android:textSize="18dp"
         android:textColor="@color/colorBlack"

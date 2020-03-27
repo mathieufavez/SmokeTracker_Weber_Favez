@@ -17,10 +17,6 @@
         <activity android:name=".smoketracker.ui.ModifyTablesActivity" />
         <activity android:name=".smoketracker.ui.ModifyUserActivity" />
         <activity android:name=".smoketracker.ui.ModifyDayActivity" />
-        <activity android:name=".smoketracker.ui.AddDayActivity" />
-        <activity android:name=".smoketracker.ui.AddUserActivity" />
-        <activity android:name=".smoketracker.ui.DeleteDayActivity" />
-        <activity android:name=".smoketracker.ui.DeleteUserActivity" />
         <activity android:name=".smoketracker.ui.ShowDayActivity" />
         <activity android:name=".smoketracker.ui.ShowUserActivity" />
         <activity android:name=".smoketracker.ui.MainActivity">

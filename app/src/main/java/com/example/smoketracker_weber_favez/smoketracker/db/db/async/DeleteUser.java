@@ -3,10 +3,10 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import com.example.smoketracker_weber_favez.smoketracker.db.db.AppDatabase;
-import com.example.smoketracker_weber_favez.smoketracker.db.db.entity.User;
+import com.example.smoketracker_weber_favez.smoketracker.db.db.entity.UserEntity;
 import com.example.smoketracker_weber_favez.smoketracker.util.OnAsyncEventListener;
 
-public class DeleteUser extends AsyncTask<User, Void, Void> {
+public class DeleteUser extends AsyncTask<UserEntity, Void, Void> {
 
     private AppDatabase database;
     private OnAsyncEventListener callback;
@@ -18,10 +18,10 @@ public class DeleteUser extends AsyncTask<User, Void, Void> {
     }
 
     @Override
-    protected Void doInBackground(User... params) {
+    protected Void doInBackground(UserEntity... params) {
         try {
-            for (User client : params)
-                database.userDao().delete(client);
+            for (UserEntity user : params)
+                database.userDao().delete(user);
         } catch (Exception e) {
             exception = e;
         }

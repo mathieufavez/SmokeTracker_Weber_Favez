@@ -1,6 +1,5 @@
 package com.example.smoketracker_weber_favez.smoketracker.viewmodel;
 
-
 import android.app.Application;
 import android.content.Context;
 
@@ -11,7 +10,7 @@ import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.smoketracker_weber_favez.smoketracker.db.db.entity.User;
+import com.example.smoketracker_weber_favez.smoketracker.db.db.entity.UserEntity;
 import com.example.smoketracker_weber_favez.smoketracker.db.db.repository.UserRepository;
 import com.example.smoketracker_weber_favez.smoketracker.util.OnAsyncEventListener;
 
@@ -23,10 +22,10 @@ public class UserViewModel extends AndroidViewModel {
     private Context applicationContext;
 
     // MediatorLiveData can observe other LiveData objects and react on their emissions.
-    private final MediatorLiveData<User> observableClient;
+    private final MediatorLiveData<UserEntity> observableClient;
 
     public UserViewModel(@NonNull Application application,
-                           final String email, UserRepository userRepository) {
+                         final String email, UserRepository userRepository) {
         super(application);
 
         repository = userRepository;
@@ -37,15 +36,12 @@ public class UserViewModel extends AndroidViewModel {
         // set by default null, until we get data from the database.
         observableClient.setValue(null);
 
-        LiveData<User> client = repository.getUser(email, applicationContext);
+        LiveData<UserEntity> user = repository.getUser(email, applicationContext);
 
         // observe the changes of the client entity from the database and forward them
-        observableClient.addSource(client, observableClient::setValue);
+        observableClient.addSource(user, observableClient::setValue);
     }
 
-    /**
-     * A creator is used to inject the account id into the ViewModel
-     */
     public static class Factory extends ViewModelProvider.NewInstanceFactory {
 
         @NonNull
@@ -55,9 +51,9 @@ public class UserViewModel extends AndroidViewModel {
 
         private final UserRepository repository;
 
-        public Factory(@NonNull Application application, String clientEmail) {
+        public Factory(@NonNull Application application, String userEmail) {
             this.application = application;
-            this.email = clientEmail;
+            this.email = userEmail;
             repository = UserRepository.getInstance();
         }
 
@@ -71,20 +67,21 @@ public class UserViewModel extends AndroidViewModel {
     /**
      * Expose the LiveData ClientEntity query so the UI can observe it.
      */
-    public LiveData<User> getClient() {
+    public LiveData<UserEntity> getUser() {
         return observableClient;
     }
 
-    public void createClient(User user, OnAsyncEventListener callback) {
+    public void createUser(UserEntity user, OnAsyncEventListener callback) {
         repository.insert(user, callback, applicationContext);
     }
 
-    public void updateClient(User user, OnAsyncEventListener callback) {
+    public void updateUser(UserEntity user, OnAsyncEventListener callback) {
         repository.update(user, callback, applicationContext);
     }
 
-    public void deleteClient(User user, OnAsyncEventListener callback) {
+    public void deleteUser(UserEntity user, OnAsyncEventListener callback) {
         repository.delete(user, callback, applicationContext);
     }
 }
+
 

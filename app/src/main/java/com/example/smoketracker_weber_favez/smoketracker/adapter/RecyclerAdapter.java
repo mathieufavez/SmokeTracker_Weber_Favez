@@ -1,5 +1,4 @@
 package com.example.smoketracker_weber_favez.smoketracker.adapter;
-
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -7,16 +6,18 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
+
 import com.example.smoketracker_weber_favez.R;
-import com.example.smoketracker_weber_favez.smoketracker.db.db.entity.User;
+import com.example.smoketracker_weber_favez.smoketracker.db.db.entity.UserEntity;
 import com.example.smoketracker_weber_favez.smoketracker.util.RecyclerViewItemClickListener;
 
 import java.util.List;
 import java.util.Objects;
 
+
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
 
-    private List<User> data;
+    private List<UserEntity> data;
     private RecyclerViewItemClickListener listener;
 
     // Provide a reference to the views for each data item
@@ -41,16 +42,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                 .inflate(R.layout.recycler_view, parent, false);
         final ViewHolder viewHolder = new ViewHolder(v);
         v.setOnClickListener(view -> listener.onItemClick(view, viewHolder.getAdapterPosition()));
-        v.setOnLongClickListener(view -> {
-            listener.onItemLongClick(view, viewHolder.getAdapterPosition());
-            return true;
-        });
+
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(RecyclerAdapter.ViewHolder holder, int position) {
-        User item = data.get(position);
+        UserEntity item = data.get(position);
         holder.textView.setText(item.toString());
     }
 
@@ -63,7 +61,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         }
     }
 
-    public void setData(final List<User> data) {
+    public void setData(final List<UserEntity> data) {
         if (this.data == null) {
             this.data = data;
             notifyItemRangeInserted(0, data.size());
@@ -82,7 +80,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                 @Override
                 public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
 
-                    if (RecyclerAdapter.this.data instanceof User) {
+                    if (RecyclerAdapter.this.data instanceof UserEntity) {
                         return (RecyclerAdapter.this.data.get(oldItemPosition)).getUser_email().equals(
                                 (data.get(newItemPosition)).getUser_email());
                     }
@@ -91,9 +89,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
                 @Override
                 public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-                    if (RecyclerAdapter.this.data instanceof User) {
-                        User newClient = data.get(newItemPosition);
-                        User oldClient = RecyclerAdapter.this.data.get(newItemPosition);
+                    if (RecyclerAdapter.this.data instanceof UserEntity) {
+                        UserEntity newClient = data.get(newItemPosition);
+                        UserEntity oldClient = RecyclerAdapter.this.data.get(newItemPosition);
                         return Objects.equals(newClient.getUser_email(), oldClient.getUser_email())
                                 && Objects.equals(newClient.getUser_first_name(), oldClient.getUser_first_name())
                                 && Objects.equals(newClient.getUser_last_name(), oldClient.getUser_last_name());

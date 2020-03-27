@@ -10,26 +10,23 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
-import com.example.smoketracker_weber_favez.smoketracker.db.db.dao.DayDao;
+
 import com.example.smoketracker_weber_favez.smoketracker.db.db.dao.UserDao;
-import com.example.smoketracker_weber_favez.smoketracker.db.db.entity.Day;
-import com.example.smoketracker_weber_favez.smoketracker.db.db.entity.User;
+import com.example.smoketracker_weber_favez.smoketracker.db.db.entity.UserEntity;
+
 
 import java.util.concurrent.Executors;
 
-@Database(entities = {User.class, Day.class}, version = 3)
+@Database(entities = {UserEntity.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static final String TAG = "AppDatabase";
-    private static final String DATABASE_NAME = "smoke_tracker_db";
+
     private static AppDatabase instance;
 
-
-//For Singleton instantiation
-   private static final Object LOCK = new Object();
+    private static final String DATABASE_NAME = "SmokeTrackerDatabase";
 
     public abstract UserDao userDao();
-    public abstract DayDao dayDao();
 
     private final MutableLiveData<Boolean> isDatabaseCreated = new MutableLiveData<>();
 
@@ -84,3 +81,4 @@ public abstract class AppDatabase extends RoomDatabase {
         return isDatabaseCreated;
     }
 }
+

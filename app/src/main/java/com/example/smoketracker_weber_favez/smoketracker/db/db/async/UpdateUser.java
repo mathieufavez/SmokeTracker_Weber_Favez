@@ -3,10 +3,10 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import com.example.smoketracker_weber_favez.smoketracker.db.db.AppDatabase;
-import com.example.smoketracker_weber_favez.smoketracker.db.db.entity.User;
+import com.example.smoketracker_weber_favez.smoketracker.db.db.entity.UserEntity;
 import com.example.smoketracker_weber_favez.smoketracker.util.OnAsyncEventListener;
 
-public class UpdateUser extends AsyncTask<User, Void, Void> {
+public class UpdateUser extends AsyncTask<UserEntity, Void, Void> {
 
     private AppDatabase database;
     private OnAsyncEventListener callback;
@@ -18,10 +18,10 @@ public class UpdateUser extends AsyncTask<User, Void, Void> {
     }
 
     @Override
-    protected Void doInBackground(User... params) {
+    protected Void doInBackground(UserEntity... params) {
         try {
-            for (User client : params)
-                database.userDao().update(client);
+            for (UserEntity user : params)
+                database.userDao().update(user);
         } catch (Exception e) {
             exception = e;
         }
@@ -39,4 +39,3 @@ public class UpdateUser extends AsyncTask<User, Void, Void> {
         }
     }
 }
-

@@ -5,9 +5,9 @@ import android.content.Context;
 import androidx.lifecycle.LiveData;
 
 import com.example.smoketracker_weber_favez.smoketracker.db.db.AppDatabase;
-import com.example.smoketracker_weber_favez.smoketracker.db.db.async.CreateUser;
-import com.example.smoketracker_weber_favez.smoketracker.db.db.async.DeleteUser;
-import com.example.smoketracker_weber_favez.smoketracker.db.db.async.UpdateUser;
+import com.example.smoketracker_weber_favez.smoketracker.db.db.async.User.CreateUser;
+import com.example.smoketracker_weber_favez.smoketracker.db.db.async.User.DeleteUser;
+import com.example.smoketracker_weber_favez.smoketracker.db.db.async.User.UpdateUser;
 import com.example.smoketracker_weber_favez.smoketracker.db.db.entity.UserEntity;
 import com.example.smoketracker_weber_favez.smoketracker.util.OnAsyncEventListener;
 

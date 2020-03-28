@@ -9,17 +9,20 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.example.smoketracker_weber_favez.smoketracker.db.db.dao.DayDao;
 import com.example.smoketracker_weber_favez.smoketracker.db.db.dao.UserDao;
+import com.example.smoketracker_weber_favez.smoketracker.db.db.entity.DayEntity;
 import com.example.smoketracker_weber_favez.smoketracker.db.db.entity.UserEntity;
 
 
 import java.util.concurrent.Executors;
 
-@Database(entities = {UserEntity.class}, version = 1)
+@Database(entities = {UserEntity.class, DayEntity.class}, version = 4)
+@TypeConverters({DateConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
-
     private static final String TAG = "AppDatabase";
 
     private static AppDatabase instance;
@@ -27,6 +30,7 @@ public abstract class AppDatabase extends RoomDatabase {
     private static final String DATABASE_NAME = "SmokeTrackerDatabase";
 
     public abstract UserDao userDao();
+    public abstract DayDao dayDao();
 
     private final MutableLiveData<Boolean> isDatabaseCreated = new MutableLiveData<>();
 
@@ -50,6 +54,7 @@ public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase buildDatabase(final Context appContext) {
         Log.i(TAG, "Database will be initialized.");
         return Room.databaseBuilder(appContext, AppDatabase.class, DATABASE_NAME)
+                .fallbackToDestructiveMigration()
                 .addCallback(new Callback() {
                     @Override
                     public void onCreate(@NonNull SupportSQLiteDatabase db) {

@@ -2,7 +2,9 @@ package com.example.smoketracker_weber_favez.smoketracker.db.db.entity;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.Ignore;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "users")
@@ -49,9 +51,7 @@ public class UserEntity {
 
     @Ignore
     public UserEntity() {
-
     }
-
 
     public int getId() {
         return id;

@@ -93,6 +93,11 @@ public class Login_activity extends AppCompatActivity {
                         passwordLogin.setText("");
                     }
                 }
+                else {
+                    emailLogin.setError("Invalid e-mail address");
+                    emailLogin.requestFocus();
+                    emailLogin.setText("");
+                }
             });
         }
     }

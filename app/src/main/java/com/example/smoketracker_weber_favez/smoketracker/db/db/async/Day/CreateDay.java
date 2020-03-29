@@ -5,9 +5,7 @@ import android.os.AsyncTask;
 
 import com.example.smoketracker_weber_favez.smoketracker.db.db.AppDatabase;
 import com.example.smoketracker_weber_favez.smoketracker.db.db.entity.DayEntity;
-import com.example.smoketracker_weber_favez.smoketracker.db.db.entity.UserEntity;
 import com.example.smoketracker_weber_favez.smoketracker.util.OnAsyncEventListener;
-
 public class CreateDay extends AsyncTask<DayEntity, Void, Void> {
 
     private AppDatabase database;
@@ -23,7 +21,7 @@ public class CreateDay extends AsyncTask<DayEntity, Void, Void> {
     protected Void doInBackground(DayEntity... params) {
         try {
             for (DayEntity day : params)
-                database.dayDao().insert(day);
+                 database.dayDao().insert(day);
         } catch (Exception e) {
             exception = e;
         }

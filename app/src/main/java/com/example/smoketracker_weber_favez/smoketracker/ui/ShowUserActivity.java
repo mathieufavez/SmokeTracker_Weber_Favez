@@ -17,8 +17,7 @@ import android.widget.Toast;
 import com.example.smoketracker_weber_favez.R;
 import com.example.smoketracker_weber_favez.smoketracker.db.db.entity.UserEntity;
 import com.example.smoketracker_weber_favez.smoketracker.util.OnAsyncEventListener;
-import com.example.smoketracker_weber_favez.smoketracker.viewmodel.UserViewModel;
-
+import com.example.smoketracker_weber_favez.smoketracker.viewmodel.User.UserViewModel;
 
 public class ShowUserActivity extends AppCompatActivity {
 

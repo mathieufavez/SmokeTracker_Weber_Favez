@@ -6,17 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import com.example.smoketracker_weber_favez.R;
-import com.example.smoketracker_weber_favez.smoketracker.db.db.AppDatabase;
 
 public class AccountFragment extends Fragment {
-    AppDatabase db;
     private Button modifyButton;
-    private Button startOverButton;
     private Button modifyTablesButton;
 
     @Nullable
@@ -25,24 +20,18 @@ public class AccountFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_account, container, false);
         modifyButton = (Button) view.findViewById(R.id.button_modify);
-        startOverButton = (Button) view.findViewById(R.id.button_start_over);
         modifyTablesButton = (Button) view.findViewById(R.id.button_modify_tables);
+
+        String userEmailLogged = getActivity().getIntent().getStringExtra("loggedUserEmail");
+
 
         modifyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Launch the next activity
-                Intent homeActivityIntent = new Intent(getContext(), HomeActivity.class);
+                Intent homeActivityIntent = new Intent(getContext(), ModifyInfoActivity.class);
+                homeActivityIntent.putExtra("userLoggedEmail",userEmailLogged);
                 startActivity(homeActivityIntent);
-            }
-        });
-
-        startOverButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Launch the next activity
-                Intent startOverIntent = new Intent(getContext(), AccountFragment.class);
-                startActivity(startOverIntent);
             }
         });
 
@@ -57,6 +46,7 @@ public class AccountFragment extends Fragment {
         return view;
 
     }
+
 }
 
 

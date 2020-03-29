@@ -6,7 +6,6 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
-import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
@@ -19,17 +18,26 @@ public interface DayDao {
     @Query("SELECT * FROM days WHERE id = :id")
     LiveData<DayEntity> getOneDay(int id);
 
+    @Query("SELECT * FROM days WHERE userEmail = :userEmail")
+    LiveData<DayEntity> getOneDay(String userEmail);
+
     @Query("SELECT * FROM days")
     LiveData<List<DayEntity>> getAllDays();
 
-    @Query("SELECT * FROM days WHERE id=:userId")
+    @Query("SELECT * FROM days WHERE userId=:userId")
     LiveData<List<DayEntity>> getAllDaysForOneUser(int userId);
+
+    @Query("SELECT * FROM days WHERE userEmail=:userEmail")
+    LiveData<List<DayEntity>> getAllDaysForOneUser(String userEmail);
+
+    @Query("SELECT cigarettes_smoked_per_day FROM days WHERE userId= :idUser AND id = :idDay")
+    int getCigarettesSmokedForADay (int idUser, int idDay);
+
+    @Update
+    void updateCigarettesSmoked(DayEntity day);
 
     @Insert
     void insert(DayEntity day)throws SQLiteConstraintException;
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertAll(List<DayEntity> days);
 
     @Update
     void update(DayEntity day);

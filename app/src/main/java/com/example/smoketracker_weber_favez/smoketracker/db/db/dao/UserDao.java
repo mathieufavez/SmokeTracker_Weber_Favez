@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
@@ -24,14 +25,17 @@ public interface UserDao {
     @Query("SELECT * FROM users")
     LiveData<List<UserEntity>> getAll();
 
+    @Query("SELECT id FROM users WHERE email= :email")
+    int getIdUserByEmail(String email);
+
     @Insert
-    void insert(UserEntity user) throws SQLiteConstraintException;
+    long insert(UserEntity user) throws SQLiteConstraintException;
 
     @Update
-    void update(UserEntity client);
+    void update(UserEntity user);
 
     @Delete
-    void delete(UserEntity client);
+    void delete(UserEntity user);
 
     @Query("DELETE FROM users")
     void deleteAll();

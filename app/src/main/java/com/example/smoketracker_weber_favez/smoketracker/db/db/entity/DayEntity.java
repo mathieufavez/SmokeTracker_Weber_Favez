@@ -4,19 +4,32 @@ import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
 import com.example.smoketracker_weber_favez.smoketracker.db.db.DateConverter;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 @Entity(tableName = "days",
         foreignKeys =
         @ForeignKey(
-                entity = UserEntity.class,
-                parentColumns = "id",
-                childColumns = "userId",
-                onDelete = ForeignKey.CASCADE
-        )
+        entity = UserEntity.class,
+        parentColumns = "email",
+        childColumns = "userEmail",
+        onDelete = ForeignKey.CASCADE
+),
+        indices = {
+                @Index(
+                        value = {"userId"}
+                ),
+                @Index(
+                value = {"userEmail"}
+        )}
 )
 
 public class DayEntity implements Comparable{
@@ -27,7 +40,7 @@ public class DayEntity implements Comparable{
     //Date a la place de String
     @ColumnInfo(name = "date")
     @TypeConverters({DateConverter.class})
-    private String date;
+    private Date date;
 
     @ColumnInfo(name = "day_number")
     private int day_number;
@@ -44,20 +57,28 @@ public class DayEntity implements Comparable{
     @ColumnInfo(name = "userId")
     private int userId;
 
-    public DayEntity(String date, int day_number, int cigarettes_smoked_per_day, int cigarettes_craved_per_day, double money_saved_per_day, int userId) {
+    @ColumnInfo(name = "userEmail")
+    private String userEmail;
+
+    public DayEntity(Date date, int day_number, int cigarettes_smoked_per_day, int cigarettes_craved_per_day, double money_saved_per_day, int userId, String userEmail) throws ParseException {
         this.date = date;
         this.day_number = day_number;
         this.cigarettes_smoked_per_day = cigarettes_smoked_per_day;
         this.cigarettes_craved_per_day = cigarettes_craved_per_day;
         this.money_saved_per_day = money_saved_per_day;
         this.userId = userId;
+        this.userEmail = userEmail;
+    }
+
+    @Ignore
+    public DayEntity() throws ParseException {
     }
 
     public int getId() {
         return id;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
@@ -81,11 +102,15 @@ public class DayEntity implements Comparable{
         return userId;
     }
 
+    public String getUserEmail() {
+        return userEmail;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -109,14 +134,15 @@ public class DayEntity implements Comparable{
         this.userId = userId;
     }
 
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
     @Override
     public String toString() {
         return id+ " " + date;
     }
 
-    public String toStringDateFormat() {
-        return date;
-    }
 
     @Override
     public int compareTo(@NonNull Object o) {

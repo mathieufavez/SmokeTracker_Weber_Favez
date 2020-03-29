@@ -1,44 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/lightsilverbackground"
+    tools:context=".smoketracker.ui.HomeActivity"
     android:orientation="vertical"
-    tools:context=".smoketracker.ui.ShowDayActivity">
-
+    android:background="@drawable/lightsilverbackground">
 
     <TextView
-        android:id="@+id/show_day_text_view"
+        android:id="@+id/modify_info_textview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:padding="10dp"
-        android:text="Show Day"
-        android:textAlignment="center"
+        android:padding="20dp"
+        android:textSize="25dp"
         android:textColor="@color/colorBlack"
-        android:textSize="25sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:text="Modify your information"
+        android:textAlignment="center"
+        />
+
 
     <EditText
-        android:id="@+id/edit_date_input"
+        android:id="@+id/modify_lastname_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="7dp"
-        android:hint="Date"
+        android:hint="Lastname"
         android:textSize="18dp"
         android:textColor="@color/colorBlack"
         android:textColorHint="@color/colorGreyLight"
         android:backgroundTint="@android:color/black"
-        android:inputType="date"
+        android:inputType="textLongMessage"
         />
     <EditText
-        android:id="@+id/edit_day_number_input"
+        android:id="@+id/modify_firstname_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="7dp"
-        android:hint="Day number"
+        android:hint="Firstname"
+        android:textSize="18dp"
+        android:textColor="@color/colorBlack"
+        android:textColorHint="@color/colorGreyLight"
+        android:backgroundTint="@android:color/black"
+        android:inputType="textLongMessage"
+        />
+
+    <EditText
+        android:id="@+id/modify_email_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="7dp"
+        android:hint="Email"
+        android:textSize="18dp"
+        android:textColor="@color/colorBlack"
+        android:textColorHint="@color/colorGreyLight"
+        android:backgroundTint="@android:color/black"
+        android:inputType="textLongMessage"
+        />
+
+    <EditText
+        android:id="@+id/modify_password_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="7dp"
+        android:hint="Password"
+        android:textSize="18dp"
+        android:textColor="@color/colorBlack"
+        android:textColorHint="@color/colorGreyLight"
+        android:backgroundTint="@android:color/black"
+        android:inputType="textPassword"
+        />
+
+    <EditText
+        android:id="@+id/modify_brand_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="7dp"
+        android:hint="Brand"
+        android:textSize="18dp"
+        android:textColor="@color/colorBlack"
+        android:textColorHint="@color/colorGreyLight"
+        android:backgroundTint="@android:color/black"
+        android:inputType="textLongMessage"
+        />
+    <EditText
+        android:id="@+id/modify_packetprice_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="7dp"
+        android:hint="Packet price"
+        android:textSize="18dp"
+        android:textColor="@color/colorBlack"
+        android:textColorHint="@color/colorGreyLight"
+        android:backgroundTint="@android:color/black"
+        android:inputType="numberDecimal"
+        />
+    <EditText
+        android:id="@+id/modify_quantityperpacket_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="7dp"
+        android:hint="Quantity per packet"
         android:textSize="18dp"
         android:textColor="@color/colorBlack"
         android:textColorHint="@color/colorGreyLight"
@@ -46,9 +110,8 @@
         android:inputType="number"
         />
 
-
     <EditText
-        android:id="@+id/edit_cigarettes_smoked_per_day"
+        android:id="@+id/modify_smokeperday_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="7dp"
@@ -57,73 +120,17 @@
         android:textColor="@color/colorBlack"
         android:textColorHint="@color/colorGreyLight"
         android:backgroundTint="@android:color/black"
-        android:inputType="number"
-        />
+        android:inputType="number" />
 
-
-
-    <EditText
-        android:id="@+id/edit_cigarettes_craved_per_day"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="7dp"
-        android:hint="Cigarettes craved per day"
-        android:textSize="18dp"
-        android:textColor="@color/colorBlack"
-        android:textColorHint="@color/colorGreyLight"
-        android:backgroundTint="@android:color/black"
-        android:inputType="number"
-        />
-    <EditText
-        android:id="@+id/edit_money_saved_per_day"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="7dp"
-        android:hint="Money saved per day"
-        android:textSize="18dp"
-        android:textColor="@color/colorBlack"
-        android:textColorHint="@color/colorGreyLight"
-        android:backgroundTint="@android:color/black"
-        android:inputType="numberDecimal"
-        />
-    <EditText
-        android:id="@+id/edit_userId"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="7dp"
-        android:hint="Foreign key user id"
-        android:textSize="18dp"
-        android:textColor="@color/colorBlack"
-        android:textColorHint="@color/colorGreyLight"
-        android:backgroundTint="@android:color/black"
-        android:inputType="number"
-        />
-
-    <EditText
-        android:id="@+id/edit_userEmail_showday"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="7dp"
-        android:hint="Email user"
-        android:textSize="18dp"
-        android:textColor="@color/colorBlack"
-        android:textColorHint="@color/colorGreyLight"
-        android:backgroundTint="@android:color/black"
-        android:inputType="textLongMessage"
-        />
 
     <Button
-        android:id="@+id/button_confirm_dayAdd"
+        android:id="@+id/button_confirm_modification"
         android:layout_gravity="center"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_margin="25dp"
-        android:text="Next"
+        android:text="Confirm"
         android:background="@drawable/myborder"
         android:textColor="@color/colorBlack"
         />
-
-
-
-
 </LinearLayout>

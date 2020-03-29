@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.smoketracker_weber_favez.R;
-import com.example.smoketracker_weber_favez.smoketracker.viewmodel.UserViewModel;
+import com.example.smoketracker_weber_favez.smoketracker.viewmodel.User.UserViewModel;
 
 public class Login_activity extends AppCompatActivity {
 
@@ -49,6 +49,7 @@ public class Login_activity extends AppCompatActivity {
         boolean cancel = false;
         View focusView = null;
 
+
         // Check for a valid password, if the user entered one.
         if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
             passwordLogin.setError("This password is too short (<5 characters");
@@ -58,6 +59,7 @@ public class Login_activity extends AppCompatActivity {
         }
 
         // Check for a valid email address.
+
         if (TextUtils.isEmpty(email)) {
             emailLogin.setError("This field is required");
             focusView = emailLogin;
@@ -82,7 +84,9 @@ public class Login_activity extends AppCompatActivity {
                         editor.putString("LoggedIn", userEntity.getUser_email());
                         editor.apply();
 
+
                         Intent intent = new Intent(Login_activity.this, TrackingActivity.class);
+                        intent.putExtra("loggedUserEmail", userEntity.getUser_email());
                         startActivity(intent);
                         emailLogin.setText("");
                         passwordLogin.setText("");

@@ -32,11 +32,19 @@ public class DayRepository {
         public LiveData<DayEntity> getOneDay(final int id, Context context){
             return AppDatabase.getInstance(context).dayDao().getOneDay(id);
         }
+
+        public LiveData<DayEntity> getOneDayWithEmail(final String email, Context context){
+            return AppDatabase.getInstance(context).dayDao().getOneDay(email);
+        }
         public LiveData<List<DayEntity>> getAllDays(Context context) {
             return AppDatabase.getInstance(context).dayDao().getAllDays();
         }
         public LiveData<List<DayEntity>> getAllDaysForOneUser(final int id, Context context) {
             return AppDatabase.getInstance(context).dayDao().getAllDaysForOneUser(id);
+        }
+
+        public LiveData<List<DayEntity>> getAllDaysForOneUser(final String email, Context context) {
+            return AppDatabase.getInstance(context).dayDao().getAllDaysForOneUser(email);
         }
 
         public void insert(final DayEntity day, OnAsyncEventListener callback, Context context) {

@@ -27,7 +27,6 @@
         android:padding="10dp"
         android:layout_centerInParent="true"
         android:textColor="@color/colorBlack"
-        android:text="Since date"
         android:textAlignment="center"
         android:textSize="22sp" />
 
@@ -42,7 +41,6 @@
         android:layout_marginTop="35dp"
         android:textStyle="bold"
         android:textColor="@color/colorBlack"
-        android:text="0"
         android:textSize="20sp" />
     <TextView
         android:id="@+id/totalsmoked_textView"
@@ -67,7 +65,6 @@
         android:layout_marginTop="35dp"
         android:textStyle="bold"
         android:textColor="@color/colorBlack"
-        android:text="0"
         android:textSize="20sp" />
     <TextView
         android:id="@+id/totalcraved_textView"
@@ -92,7 +89,6 @@
         android:layout_marginTop="35dp"
         android:textStyle="bold"
         android:textColor="@color/colorBlack"
-        android:text="0"
         android:textSize="20sp" />
 
     <TextView
@@ -118,7 +114,6 @@
         android:layout_marginTop="35dp"
         android:textStyle="bold"
         android:textColor="@color/colorBlack"
-        android:text="0"
         android:textSize="20sp" />
 
     <TextView
@@ -144,7 +139,6 @@
         android:layout_marginTop="35dp"
         android:textStyle="bold"
         android:textColor="@color/colorBlack"
-        android:text="0"
         android:textSize="20sp" />
 
     <TextView

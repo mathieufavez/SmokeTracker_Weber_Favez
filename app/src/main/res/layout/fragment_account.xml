@@ -32,16 +32,6 @@
         android:text="modify" />
 
     <Button
-        android:id="@+id/button_start_over"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/myborder"
-        android:layout_gravity="center"
-        android:layout_marginBottom="25dp"
-        android:text="start over"
-        />
-
-    <Button
         android:id="@+id/button_modify_tables"
         android:layout_width="150dp"
         android:layout_height="wrap_content"

@@ -1,4 +1,4 @@
-package com.example.smoketracker_weber_favez.smoketracker.viewmodel;
+package com.example.smoketracker_weber_favez.smoketracker.viewmodel.User;
 
 import android.app.Application;
 import android.content.Context;
@@ -10,6 +10,7 @@ import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.smoketracker_weber_favez.smoketracker.db.db.AppDatabase;
 import com.example.smoketracker_weber_favez.smoketracker.db.db.entity.UserEntity;
 import com.example.smoketracker_weber_favez.smoketracker.db.db.repository.UserRepository;
 import com.example.smoketracker_weber_favez.smoketracker.util.OnAsyncEventListener;
@@ -38,7 +39,7 @@ public class UserViewModel extends AndroidViewModel {
 
         LiveData<UserEntity> user = repository.getUser(email, applicationContext);
 
-        // observe the changes of the client entity from the database and forward them
+        //observe the changes of the client entity from the database and forward them
         observableClient.addSource(user, observableClient::setValue);
     }
 
@@ -69,6 +70,11 @@ public class UserViewModel extends AndroidViewModel {
      */
     public LiveData<UserEntity> getUser() {
         return observableClient;
+    }
+
+
+    public int getIdUserByEmail(String email, Context context) {
+        return repository.getIdUserByEmail(email, context);
     }
 
     public void createUser(UserEntity user, OnAsyncEventListener callback) {

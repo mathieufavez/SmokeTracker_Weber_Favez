@@ -29,12 +29,16 @@ public class UserRepository{
         return instance;
     }
 
-
     public LiveData<UserEntity> getUser(final String email, Context context){
         return AppDatabase.getInstance(context).userDao().getByEmail(email);
     }
+
     public LiveData<List<UserEntity>> getAllUsers(Context context) {
         return AppDatabase.getInstance(context).userDao().getAll();
+    }
+
+    public int getIdUserByEmail(String email, Context context) {
+        return AppDatabase.getInstance(context).userDao().getIdUserByEmail(email);
     }
 
     public void insert(final UserEntity user, OnAsyncEventListener callback, Context context) {

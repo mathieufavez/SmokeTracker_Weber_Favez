@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.smoketracker_weber_favez.R;
-import com.example.smoketracker_weber_favez.smoketracker.viewmodel.UserViewModel;
 
 public class LoginMenuActivity extends AppCompatActivity {
 

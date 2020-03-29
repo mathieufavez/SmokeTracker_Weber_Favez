@@ -20,7 +20,7 @@
         android:textSize="25sp"/>
 
     <TextView
-        android:id="@+id/smoked_value"
+        android:id="@+id/smoked_value_history"
         android:layout_width="35dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -40,14 +40,14 @@
         android:layout_gravity="center"
         android:padding="10dp"
         android:layout_marginStart="15dp"
-        android:layout_below="@id/smoked_value"
+        android:layout_below="@id/smoked_value_history"
         android:textColor="@color/colorBlack"
         android:text="smoked"
         android:textAlignment="center"
         android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/craved_value"
+        android:id="@+id/craved_value_history"
         android:layout_width="35dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -66,7 +66,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:padding="10dp"
-        android:layout_below="@id/craved_value"
+        android:layout_below="@id/craved_value_history"
         android:layout_centerInParent="true"
         android:textColor="@color/colorBlack"
         android:text="craved"
@@ -74,7 +74,7 @@
         android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/chf_spent_value"
+        android:id="@+id/chf_spent_value_history"
         android:layout_width="35dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -95,7 +95,7 @@
         android:layout_gravity="center"
         android:padding="10dp"
         android:layout_marginEnd="15dp"
-        android:layout_below="@id/chf_spent_value"
+        android:layout_below="@id/chf_spent_value_history"
         android:layout_alignParentEnd="true"
         android:textColor="@color/colorBlack"
         android:text="spent"

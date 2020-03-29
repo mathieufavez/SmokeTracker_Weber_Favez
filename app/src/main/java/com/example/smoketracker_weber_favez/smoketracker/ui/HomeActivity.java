@@ -11,26 +11,43 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.smoketracker_weber_favez.R;
+import com.example.smoketracker_weber_favez.smoketracker.db.db.entity.DayEntity;
 import com.example.smoketracker_weber_favez.smoketracker.db.db.entity.UserEntity;
 import com.example.smoketracker_weber_favez.smoketracker.util.OnAsyncEventListener;
-import com.example.smoketracker_weber_favez.smoketracker.viewmodel.UserViewModel;
+import com.example.smoketracker_weber_favez.smoketracker.viewmodel.Day.DayViewEmailModel;
+import com.example.smoketracker_weber_favez.smoketracker.viewmodel.Day.DayViewModel;
+import com.example.smoketracker_weber_favez.smoketracker.viewmodel.User.UserViewModel;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
-    private Button mNextButton;
 
     private static final String TAG = "HomeActivity";
 
     private UserEntity user;
+    private DayEntity day;
+    private Date currentTime = Calendar.getInstance().getTime();
+
+    private List<DayEntity> days ;
 
     private EditText lastname, firstname, email, password, brand, packetPrice, quantityPerPacket, cigarettesSmokedPerDay;
+    private Button mNextButton;
 
-    private UserViewModel viewModel;
+    private UserViewModel userViewModel;
+    private DayViewEmailModel dayViewModel;
+    private DayViewModel viewModel;
+    //private DayListOneUserViewEmailModel dayListOneUserViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        days = new ArrayList<>();
 
         updateContent();
 
@@ -46,23 +63,35 @@ public class HomeActivity extends AppCompatActivity {
         cigarettesSmokedPerDay = (EditText) findViewById(R.id.edit_smokeperday_input);
 
         UserViewModel.Factory factory = new UserViewModel.Factory(getApplication(), email.getText().toString());
-        viewModel = ViewModelProviders.of(this, factory).get(UserViewModel.class);
-        viewModel.getUser().observe(this, userEntity -> {
+        userViewModel = ViewModelProviders.of(this, factory).get(UserViewModel.class);
+        userViewModel.getUser().observe(this, userEntity -> {
             if (userEntity != null) {
                 user = userEntity;
                 updateContent();
             }
         });
 
+        DayViewEmailModel.Factory factoryDay = new DayViewEmailModel.Factory(getApplication(), email.getText().toString());
+        dayViewModel = ViewModelProviders.of(this, factoryDay).get(DayViewEmailModel.class);
+        dayViewModel.getDay().observe(this, dayEntity -> {
+            if (dayEntity != null) {
+                day = dayEntity;
+            }
+        });
+
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                attemptCreateUser();
+                try {
+                    attemptCreateUser();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
 
-    private void attemptCreateUser() {
+    private void attemptCreateUser() throws ParseException {
         // Reset errors.
         email.setError(null);
         password.setError(null);
@@ -107,6 +136,9 @@ public class HomeActivity extends AppCompatActivity {
                     Double.parseDouble(packetPrice.getText().toString()),
                     Integer.parseInt(quantityPerPacket.getText().toString()),
                     Integer.parseInt(cigarettesSmokedPerDay.getText().toString()));
+
+            createDay(currentTime,1,0,0,0,email.getText().toString());
+
             Intent intent = new Intent(HomeActivity.this, TrackingActivity.class);
             startActivity(intent);
         }
@@ -125,7 +157,8 @@ public class HomeActivity extends AppCompatActivity {
         user.setUser_quantity_per_packet(quantityPerPacket);
         user.setUser_smoke_per_day_limit(cigarettesSmokedPerDay);
 
-        viewModel.createUser(user, new OnAsyncEventListener() {
+        //user.setId(userViewModel.getIdUserByEmail(email, this));
+        userViewModel.createUser(user, new OnAsyncEventListener() {
             @Override
             public void onSuccess() {
                 Log.d(TAG, "createClient: success");
@@ -133,7 +166,34 @@ public class HomeActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Exception e) {
-                Log.d(TAG, "createClient: failure", e);
+                Log.e(TAG, "createClient: failure", e);
+            }
+        });
+    }
+
+    private void createDay(Date date, int dayNumber, int cigarettesSmoked, int cigarettesCraved, double moneySaved, String userEmail) throws ParseException {
+
+        String formatedDate = new SimpleDateFormat("dd-MM-yyyy").format(date);
+
+        Date dateFromated = new SimpleDateFormat("dd-MM-yyyy").parse(formatedDate);
+
+        day = new DayEntity();
+        day.setDate(dateFromated);
+        day.setDay_number(dayNumber);
+        day.setCigarettes_smoked_per_day(cigarettesSmoked);
+        day.setCigarettes_craved_per_day(cigarettesCraved);
+        day.setMoney_saved_per_day(moneySaved);
+        day.setUserEmail(userEmail);
+
+        dayViewModel.createDay(day, new OnAsyncEventListener() {
+            @Override
+            public void onSuccess() {
+                Log.d(TAG, "createDay: success");
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                Log.e(TAG, "createDay: failure", e);
             }
         });
     }

@@ -18,7 +18,7 @@ import com.example.smoketracker_weber_favez.R;
 import com.example.smoketracker_weber_favez.smoketracker.adapter.RecyclerAdapter;
 import com.example.smoketracker_weber_favez.smoketracker.db.db.entity.UserEntity;
 import com.example.smoketracker_weber_favez.smoketracker.util.RecyclerViewItemClickListener;
-import com.example.smoketracker_weber_favez.smoketracker.viewmodel.UserListViewModel;
+import com.example.smoketracker_weber_favez.smoketracker.viewmodel.User.UserListViewModel;
 
 import java.util.ArrayList;
 import java.util.List;

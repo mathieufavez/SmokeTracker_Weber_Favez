@@ -1,4 +1,4 @@
-package com.example.smoketracker_weber_favez.smoketracker.viewmodel;
+package com.example.smoketracker_weber_favez.smoketracker.viewmodel.Day;
 
 import android.app.Application;
 import android.content.Context;
@@ -10,25 +10,24 @@ import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-
-import com.example.smoketracker_weber_favez.smoketracker.db.db.entity.UserEntity;
-import com.example.smoketracker_weber_favez.smoketracker.db.db.repository.UserRepository;
+import com.example.smoketracker_weber_favez.smoketracker.db.db.entity.DayEntity;
+import com.example.smoketracker_weber_favez.smoketracker.db.db.repository.DayRepository;
 
 import java.util.List;
 
-public class UserListViewModel extends AndroidViewModel {
+public class DayListViewModel extends AndroidViewModel {
 
-    private UserRepository repository;
+    private DayRepository repository;
 
     private Context applicationContext;
 
     // MediatorLiveData can observe other LiveData objects and react on their emissions.
-    private final MediatorLiveData<List<UserEntity>> observableClients;
+    private final MediatorLiveData<List<DayEntity>> observableClients;
 
-    public UserListViewModel(@NonNull Application application, UserRepository userRepository) {
+    public DayListViewModel(@NonNull Application application, DayRepository dayRepository) {
         super(application);
 
-        repository = userRepository;
+        repository = dayRepository;
 
         applicationContext = application.getApplicationContext();
 
@@ -36,7 +35,7 @@ public class UserListViewModel extends AndroidViewModel {
         // set by default null, until we get data from the database.
         observableClients.setValue(null);
 
-        LiveData<List<UserEntity>> users = repository.getAllUsers(applicationContext);
+        LiveData<List<DayEntity>> users = repository.getAllDays(applicationContext);
 
         // observe the changes of the entities from the database and forward them
         observableClients.addSource(users, observableClients::setValue);
@@ -50,24 +49,25 @@ public class UserListViewModel extends AndroidViewModel {
         @NonNull
         private final Application application;
 
-        private final UserRepository userRepository;
+
+        private final DayRepository dayRepository;
 
         public Factory(@NonNull Application application) {
             this.application = application;
-            userRepository = UserRepository.getInstance();
+            dayRepository = DayRepository.getInstance();
         }
 
         @Override
         public <T extends ViewModel> T create(Class<T> modelClass) {
             //noinspection unchecked
-            return (T) new UserListViewModel(application, userRepository);
+            return (T) new DayListViewModel(application, dayRepository);
         }
     }
 
     /**
      * Expose the LiveData ClientEntities query so the UI can observe it.
      */
-    public LiveData<List<UserEntity>> getUsers() {
+    public LiveData<List<DayEntity>> getAllDays() {
         return observableClients;
     }
 }

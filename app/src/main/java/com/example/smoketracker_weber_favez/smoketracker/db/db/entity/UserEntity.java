@@ -7,7 +7,8 @@ import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "users")
+
+@Entity(tableName = "users", indices = {@Index(value = {"email"}, unique = true)})
 public class UserEntity {
 
     @PrimaryKey(autoGenerate = true)
@@ -53,10 +54,10 @@ public class UserEntity {
     public UserEntity() {
     }
 
+
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }

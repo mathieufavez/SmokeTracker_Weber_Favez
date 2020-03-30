@@ -41,7 +41,6 @@ public class HomeActivity extends AppCompatActivity {
     private UserViewModel userViewModel;
     private DayViewEmailModel dayViewModel;
     private DayViewModel viewModel;
-    //private DayListOneUserViewEmailModel dayListOneUserViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +90,7 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
+    //Here we see if everything is ok for the user to create his account
     private void attemptCreateUser() throws ParseException {
         // Reset errors.
         email.setError(null);
@@ -127,6 +127,7 @@ public class HomeActivity extends AppCompatActivity {
             // form field with an error.
             focusView.requestFocus();
         } else {
+            //If it is ok we create it
             createUser(
                     lastname.getText().toString(),
                     firstname.getText().toString(),
@@ -137,8 +138,10 @@ public class HomeActivity extends AppCompatActivity {
                     Integer.parseInt(quantityPerPacket.getText().toString()),
                     Integer.parseInt(cigarettesSmokedPerDay.getText().toString()));
 
+            //and we also create a day linked to him
             createDay(currentTime,1,0,0,0,email.getText().toString());
 
+            //Then we go to the TrackingActivity and we pass it the email of the user
             Intent intent = new Intent(HomeActivity.this, TrackingActivity.class);
             intent.putExtra("loggedUserEmail", email.getText().toString());
             startActivity(intent);
@@ -146,6 +149,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 
+    //Create an user
     private void createUser(String lastName, String firstName, String email, String password, String brand, double packetPrice, int quantityPerPacket, int cigarettesSmokedPerDay) {
 
         user = new UserEntity();
@@ -171,6 +175,7 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
+    //Create a day
     private void createDay(Date date, int dayNumber, int cigarettesSmoked, int cigarettesCraved, double moneySaved, String userEmail) throws ParseException {
 
         String formatedDate = new SimpleDateFormat("dd-MM-yyyy").format(date);
@@ -197,6 +202,9 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
     }
+
+
+    //update the content
     private void updateContent() {
         if (user != null) {
             firstname.setText(user.getUser_first_name());
@@ -210,10 +218,12 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
+    //Check if the email is valid
     private boolean isEmailValid(String email) {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
+    //Check if the password is valid
     private boolean isPasswordValid(String password) {
         return password.length() > 5;
     }

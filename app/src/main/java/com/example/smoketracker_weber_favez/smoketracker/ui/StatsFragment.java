@@ -43,6 +43,8 @@ public class StatsFragment extends Fragment {
     private Date dateFirstDay;
     private static DecimalFormat df2 = new DecimalFormat("#.##");
 
+
+    //Page where we can see the general stats of the users
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

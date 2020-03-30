@@ -14,8 +14,9 @@ public class ModifyTablesActivity extends AppCompatActivity {
 
     private Button userButton;
     private Button dayButton;
+    private Button hourButton;
 
-    AppDatabase db;
+   //Here the user can choose with table he wants to see from the database
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +44,18 @@ public class ModifyTablesActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //Launch the next activity
                 Intent dayIntent = new Intent(ModifyTablesActivity.this, ModifyDayActivity.class);
+                startActivity(dayIntent);
+                // }
+
+            }
+        });
+
+        hourButton = (Button) findViewById(R.id.button_hour);
+        hourButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Launch the next activity
+                Intent dayIntent = new Intent(ModifyTablesActivity.this, ModifyHourActivity.class);
                 startActivity(dayIntent);
                 // }
 

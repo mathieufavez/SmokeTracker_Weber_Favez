@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/lightsilverbackground"
+    tools:context=".smoketracker.ui.ShowHourActivity"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/show_hour_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:padding="10dp"
+        android:text="Show Hour"
+        android:textAlignment="center"
+        android:textColor="@color/colorBlack"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/edit_hour_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="7dp"
+        android:hint="Hour"
+        android:textSize="18dp"
+        android:textColor="@color/colorBlack"
+        android:textColorHint="@color/colorGreyLight"
+        android:backgroundTint="@android:color/black"
+        android:inputType="date"
+        />
+
+    <EditText
+        android:id="@+id/edit_description_showhour"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="7dp"
+        android:hint="Description"
+        android:textSize="18dp"
+        android:textColor="@color/colorBlack"
+        android:textColorHint="@color/colorGreyLight"
+        android:backgroundTint="@android:color/black"
+        android:inputType="textLongMessage"
+        />
+
+    <EditText
+        android:id="@+id/edit_dayId_showhour"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="7dp"
+        android:hint="ID day"
+        android:textSize="18dp"
+        android:textColor="@color/colorBlack"
+        android:textColorHint="@color/colorGreyLight"
+        android:backgroundTint="@android:color/black"
+        android:inputType="number"
+        />
+
+    <Button
+        android:id="@+id/button_confirm_hourAdd"
+        android:layout_gravity="center"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="25dp"
+        android:text="Next"
+        android:background="@drawable/myborder"
+        android:textColor="@color/colorBlack"
+        />
+
+</LinearLayout>

@@ -52,6 +52,7 @@ public class Login_activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_activity);
 
+        //Format the current date to xx-xx-xxxx
         String formatedDateCurrent = new SimpleDateFormat("dd-MM-yyyy").format(currentTime);
 
         try {
@@ -66,6 +67,7 @@ public class Login_activity extends AppCompatActivity {
 
 
         buttonConnect = (Button) findViewById(R.id.button_connect);
+        //When we click on the button to connect it goes to the method to attempt connection
         buttonConnect.setOnClickListener(view -> attemptLogin());
 
     }
@@ -99,6 +101,8 @@ public class Login_activity extends AppCompatActivity {
             // form field with an error.
             focusView.requestFocus();
         } else {
+            //We search the last day of the user to check if it is a new day, if it is a new day we create one, if it isn't we don't create a new day
+            //We do that by searching the previous date
             DayListOneUserViewEmailModel.Factory factoryDay = new DayListOneUserViewEmailModel.Factory(getApplication(), email);
             dayViewModel = ViewModelProviders.of(this, factoryDay).get(DayListOneUserViewEmailModel.class);
             dayViewModel.getAllDaysForOneUser().observe(this, dayEntities -> {
@@ -114,6 +118,7 @@ public class Login_activity extends AppCompatActivity {
                     }
             );
 
+            //Useful to create a day after
             DayViewEmailModel.Factory dayFactory = new DayViewEmailModel.Factory(getApplication(), email);
             viewEmailModel = ViewModelProviders.of(this, dayFactory).get(DayViewEmailModel.class);
             viewEmailModel.getDay().observe(this, dayEntity -> {
@@ -122,6 +127,7 @@ public class Login_activity extends AppCompatActivity {
                 }
             });
 
+            //Here we check if the user has the good password
             UserViewModel.Factory factory = new UserViewModel.Factory(getApplication(), email);
             viewModel = ViewModelProviders.of(this, factory).get(UserViewModel.class);
             viewModel.getUser().observe(this, userEntity -> {
@@ -130,6 +136,7 @@ public class Login_activity extends AppCompatActivity {
                         SharedPreferences.Editor editor = getSharedPreferences("SharedPrefs", 0).edit();
                         editor.putString("LoggedIn", userEntity.getUser_email());
                         editor.apply();
+                        //If the date is different we create a day
                         if (previousDate.compareTo( dateFormatedCurrent)<0) {
                             try {
                                 createDay(currentTime,dayNumber,0,0,0,userEntity.getUser_email());
@@ -139,6 +146,7 @@ public class Login_activity extends AppCompatActivity {
                         }
                         else {
 
+                            //If everything is good we go to the trackingActivity
                             Intent intent = new Intent(Login_activity.this, TrackingActivity.class);
                             intent.putExtra("loggedUserEmail", userEntity.getUser_email());
                             startActivity(intent);

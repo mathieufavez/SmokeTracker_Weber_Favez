@@ -13,36 +13,39 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-
 import com.example.smoketracker_weber_favez.R;
-import com.example.smoketracker_weber_favez.smoketracker.adapter.RecyclerAdapter;
-import com.example.smoketracker_weber_favez.smoketracker.db.db.entity.UserEntity;
+import com.example.smoketracker_weber_favez.smoketracker.adapter.DayRecyclerAdapter;
+import com.example.smoketracker_weber_favez.smoketracker.adapter.HourRecyclerAdapter;
+import com.example.smoketracker_weber_favez.smoketracker.db.db.entity.DayEntity;
+import com.example.smoketracker_weber_favez.smoketracker.db.db.entity.HourEntity;
 import com.example.smoketracker_weber_favez.smoketracker.util.RecyclerViewItemClickListener;
-import com.example.smoketracker_weber_favez.smoketracker.viewmodel.User.UserListViewModel;
+import com.example.smoketracker_weber_favez.smoketracker.viewmodel.Day.DayListViewModel;
+import com.example.smoketracker_weber_favez.smoketracker.viewmodel.Hour.HourListViewModel;
+import com.example.smoketracker_weber_favez.smoketracker.viewmodel.Hour.ListHourViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
-public class ModifyUserActivity extends AppCompatActivity {
+public class ModifyHourActivity extends AppCompatActivity {
 
     private static final String TAG = "DetailsActivity";
 
-    private List<UserEntity> users;
-    private RecyclerAdapter recyclerAdapter;
-    private UserListViewModel viewModel;
+    private List<HourEntity> hours;
+    private HourRecyclerAdapter hourRecyclerAdapter;
+    private HourListViewModel viewModel;
 
 
-    //Here the users see a list of all the users in the Database
-    //He can click on one too have the details, and then delete or update an user
-    //He can also click on the + to add a new user directly from here
+    //Here the users see a list of all the Hours in the Database
+    //He can click on one too have the details, and then delete or update an Hour
+    //He can also click on the + to add a new Hour directly from here
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_user);
 
-        setTitle("User Details");
+        setTitle("Hour Details");
 
+        //Is ok too for Hours
         RecyclerView recyclerView = findViewById(R.id.usersRecyclerView);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
@@ -52,15 +55,16 @@ public class ModifyUserActivity extends AppCompatActivity {
                 LinearLayoutManager.VERTICAL);
         recyclerView.addItemDecoration(dividerItemDecoration);
 
-        users = new ArrayList<>();
-        recyclerAdapter = new RecyclerAdapter(new RecyclerViewItemClickListener() {
+        hours = new ArrayList<>();
+        hourRecyclerAdapter = new HourRecyclerAdapter(new RecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
                 Log.d(TAG, "clicked position:" + position);
-                Log.d(TAG, "clicked on: " + users.get(position).toString());
+                Log.d(TAG, "clicked on: " + hours.get(position).toString());
 
-                Intent intent = new Intent(ModifyUserActivity.this, ShowUserActivity.class);
-                intent.putExtra("userEmail", users.get(position).getUser_email());
+                Intent intent = new Intent(ModifyHourActivity.this, ShowHourActivity.class);
+
+                intent.putExtra("hourId", hours.get(position).getId());
                 intent.setFlags(
                         Intent.FLAG_ACTIVITY_NO_ANIMATION |
                                 Intent.FLAG_ACTIVITY_NO_HISTORY
@@ -71,23 +75,23 @@ public class ModifyUserActivity extends AppCompatActivity {
 
         });
 
-        UserListViewModel.Factory factory = new UserListViewModel.Factory(getApplication());
-        viewModel = ViewModelProviders.of(this, factory).get(UserListViewModel.class);
-        viewModel.getUsers().observe(this, userEntities -> {
-            if (userEntities != null) {
-                users = userEntities;
-                recyclerAdapter.setData(users);
+        HourListViewModel.Factory factory = new HourListViewModel.Factory(getApplication());
+        viewModel = ViewModelProviders.of(this, factory).get(HourListViewModel.class);
+        viewModel.getAllHours().observe(this, hourEntities -> {
+            if (hourEntities != null) {
+                hours = hourEntities;
+                hourRecyclerAdapter.setData(hours);
             }
         });
 
-        recyclerView.setAdapter(recyclerAdapter);
+        recyclerView.setAdapter(hourRecyclerAdapter);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
 
-        menu.add(0,0, Menu.NONE, "Create User")
+        menu.add(0,0, Menu.NONE, "Create Hour")
                 .setIcon(R.drawable.ic_add_white_24dp)
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
 
@@ -101,7 +105,7 @@ public class ModifyUserActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (item.getItemId() == 0) {
-            Intent intent = new Intent(ModifyUserActivity.this, HomeActivity.class);
+            Intent intent = new Intent(ModifyHourActivity.this, CreateHourActivity.class);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);

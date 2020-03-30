@@ -1,7 +1,5 @@
 package com.example.smoketracker_weber_favez.smoketracker.ui;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,12 +14,13 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.smoketracker_weber_favez.R;
 import com.example.smoketracker_weber_favez.smoketracker.db.db.entity.DayEntity;
+import com.example.smoketracker_weber_favez.smoketracker.db.db.entity.HourEntity;
 import com.example.smoketracker_weber_favez.smoketracker.db.db.entity.UserEntity;
 import com.example.smoketracker_weber_favez.smoketracker.util.OnAsyncEventListener;
 import com.example.smoketracker_weber_favez.smoketracker.viewmodel.Day.DayListOneUserViewEmailModel;
-import com.example.smoketracker_weber_favez.smoketracker.viewmodel.Day.DayListOneUserViewModel;
 import com.example.smoketracker_weber_favez.smoketracker.viewmodel.Day.DayViewEmailModel;
-import com.example.smoketracker_weber_favez.smoketracker.viewmodel.Day.DayViewModel;
+import com.example.smoketracker_weber_favez.smoketracker.viewmodel.Hour.HourViewModel;
+import com.example.smoketracker_weber_favez.smoketracker.viewmodel.Hour.ListHourViewModel;
 import com.example.smoketracker_weber_favez.smoketracker.viewmodel.User.UserViewModel;
 
 import java.text.DecimalFormat;
@@ -37,6 +36,8 @@ public class TrackingFragment extends Fragment {
 
     private String TAG_AddCraved = "AddCraved";
     private String TAG_AddSmoked = "AddSmoked";
+    private String TAG_AddHourCraved = "AddHourCraved";
+    private String TAG_AddHourSmoked = "AddHourSmoked";
     private TextView day_textView;
     private TextView x_cigarettes_left_textView;
     private TextView smoked_value;
@@ -49,10 +50,13 @@ public class TrackingFragment extends Fragment {
     private UserViewModel userViewModel;
     private DayListOneUserViewEmailModel dayViewModel;
     private DayViewEmailModel viewModel;
+    private HourViewModel hourViewModel;
 
     private UserEntity user;
     private DayEntity dayCraved;
     private DayEntity daySmoke;
+    private HourEntity hour;
+
 
     private List<DayEntity> days;
 
@@ -63,6 +67,7 @@ public class TrackingFragment extends Fragment {
 
     private Date currentTimeSmoked;
     private Date currentTimeCraved;
+    private Date formatedOk;
     private static DecimalFormat df2 = new DecimalFormat("#.##");
 
 
@@ -75,6 +80,7 @@ public class TrackingFragment extends Fragment {
 
         days = new ArrayList<>();
 
+        //We take the email of the user logged
         String userEmailLogged = getActivity().getIntent().getStringExtra("loggedUserEmail");
 
         UserViewModel.Factory factory = new UserViewModel.Factory(getActivity().getApplication(), userEmailLogged);
@@ -87,16 +93,15 @@ public class TrackingFragment extends Fragment {
 
             }
         });
+        //When the user clicks on I Craved it creates an hour and update the day and user table
         button_i_craved.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 addCraved();
-                //Put the time when we clicked
-                //currentTimeCraved =  Calendar.getInstance().getTime();
-                //String formatedDate = new SimpleDateFormat("HH:mm").format(currentTimeCraved);
             }
         });
 
+        //Same as up
         button_i_smoked.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,7 +112,40 @@ public class TrackingFragment extends Fragment {
         return view;
     }
 
+    //Create the hour
     private void addCraved() {
+        HourViewModel.Factory factory = new HourViewModel.Factory(getActivity().getApplication(), days.get(days.size()-1).getId());
+        hourViewModel = ViewModelProviders.of(this, factory).get(HourViewModel.class);
+        hourViewModel.getHour().observe(this, hourEntity -> {
+                hour = new HourEntity();
+                hour.setIdDay(days.get(days.size()-1).getId());
+                currentTimeCraved =  Calendar.getInstance().getTime();
+                String formatedDate = new SimpleDateFormat("HH:mm").format(currentTimeCraved);
+                try {
+                    formatedOk = new SimpleDateFormat("HH:mm").parse(formatedDate);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                hour.setHour(formatedOk);
+                hour.setDescription("Craved");
+
+                hourViewModel.createHour(hour, new OnAsyncEventListener() {
+                    @Override
+                    public void onSuccess() {
+                        Log.d(TAG_AddHourCraved, "addHourCraved: success");
+                    }
+
+                    @Override
+                    public void onFailure(Exception e) {
+                        Log.d(TAG_AddHourCraved, "addHourCraved: failure");
+                    }
+                });
+                hourViewModel.getHour().removeObservers(this);
+        });
+
+
+
         DayListOneUserViewEmailModel.Factory factoryDay = new DayListOneUserViewEmailModel.Factory(getActivity().getApplication(), user.getUser_email());
         dayViewModel = ViewModelProviders.of(this, factoryDay).get(DayListOneUserViewEmailModel.class);
         dayViewModel.getAllDaysForOneUser().observe(this, dayEntities -> {
@@ -139,7 +177,39 @@ public class TrackingFragment extends Fragment {
 
     }
 
+    //Create the hour
     private void addSmoked() {
+
+        HourViewModel.Factory factory = new HourViewModel.Factory(getActivity().getApplication(), days.get(days.size()-1).getId());
+        hourViewModel = ViewModelProviders.of(this, factory).get(HourViewModel.class);
+        hourViewModel.getHour().observe(this, hourEntity -> {
+            hour = new HourEntity();
+            hour.setIdDay(days.get(days.size()-1).getId());
+            currentTimeCraved =  Calendar.getInstance().getTime();
+            String formatedDate = new SimpleDateFormat("HH:mm").format(currentTimeCraved);
+            try {
+                formatedOk = new SimpleDateFormat("HH:mm").parse(formatedDate);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            hour.setHour(formatedOk);
+            hour.setDescription("Smoked");
+
+            hourViewModel.createHour(hour, new OnAsyncEventListener() {
+                @Override
+                public void onSuccess() {
+                    Log.d(TAG_AddHourSmoked, "addHourSmoked: success");
+                }
+
+                @Override
+                public void onFailure(Exception e) {
+                    Log.d(TAG_AddHourSmoked, "addHourSmoked: failure");
+                }
+            });
+            hourViewModel.getHour().removeObservers(this);
+        });
+
         cigaretteLimit -= 1;
         DayListOneUserViewEmailModel.Factory factoryDay = new DayListOneUserViewEmailModel.Factory(getActivity().getApplication(), user.getUser_email());
         dayViewModel = ViewModelProviders.of(this, factoryDay).get(DayListOneUserViewEmailModel.class);

@@ -46,13 +46,14 @@ public class HistoryFragment extends Fragment {
 
     private SimpleAdapter adapter;
 
-
     private List<String> daysList;
     private List<String> dateList;
 
     private Date dateParse;
     private String stringParse;
 
+    //page where we can see all the days with the date in a ListView
+    //WHen we click on a listView, it goes on the respective day and we have statistiques about this unique day
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_history, container, false);
@@ -68,7 +69,7 @@ public class HistoryFragment extends Fragment {
         userViewModel.getUser().observe(this, userEntity -> {
             if (userEntity!=null) {
                 user = userEntity;
-                declareDayFactory(userEntity.getId());
+                declareDayFactory();
             }
         });
 
@@ -76,7 +77,7 @@ public class HistoryFragment extends Fragment {
         return view;
     }
 
-    private void declareDayFactory(int userId){
+    private void declareDayFactory(){
         DayListOneUserViewEmailModel.Factory factoryDay = new DayListOneUserViewEmailModel.Factory(getActivity().getApplication(),user.getUser_email());
         dayViewModel = ViewModelProviders.of(this, factoryDay).get(DayListOneUserViewEmailModel.class);
         dayViewModel.getAllDaysForOneUser().observe(this, dayEntities -> {

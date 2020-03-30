@@ -16,6 +16,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+
+//Page where the user creates the day directly in the database
 public class CreateDayActivity extends AppCompatActivity {
 
     private static final String TAG = "CreateDayActivity";
@@ -27,6 +29,7 @@ public class CreateDayActivity extends AppCompatActivity {
 
     private DayEntity day;
 
+    //Page where the user creates a day directly in the database manually
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,8 +59,6 @@ public class CreateDayActivity extends AppCompatActivity {
         });
     }
 
-
-    //Créer en boucle
     private void createDay(Date date, int dayNbr, int cigarettesSmoked, int cigarettesCraved, double moneySpent, String emailUser) {
         DayViewEmailModel.Factory factory = new DayViewEmailModel.Factory(getApplication(), emailUser);
         viewModel = ViewModelProviders.of(this, factory).get(DayViewEmailModel.class);

@@ -43,4 +43,14 @@
             android:text="day"
             />
 
+    <Button
+        android:id="@+id/button_hour"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/myborder"
+        android:layout_gravity="center"
+        android:layout_marginBottom="25dp"
+        android:text="hour"
+        />
+
 </LinearLayout>

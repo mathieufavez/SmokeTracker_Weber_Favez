@@ -35,6 +35,10 @@ public class ModifyDayActivity extends AppCompatActivity {
     private DayRecyclerAdapter dayRecyclerAdapter;
     private DayListViewModel viewModel;
 
+
+    //Here the users see a list of all the Days in the Database
+    //He can click on one too have the details, and then delete or update a day
+    //He can also click on the + to add a new day directly from here
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

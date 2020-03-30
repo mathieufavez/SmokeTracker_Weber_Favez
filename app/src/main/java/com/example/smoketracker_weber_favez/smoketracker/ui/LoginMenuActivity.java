@@ -22,6 +22,7 @@ public class LoginMenuActivity extends AppCompatActivity {
         mConnectButton = (Button) findViewById(R.id.button_login);
         mCreateAccountButton = (Button) findViewById(R.id.button_create_account);
 
+        //Click on this button to Login
         mConnectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -30,7 +31,7 @@ public class LoginMenuActivity extends AppCompatActivity {
             }
         });
 
-
+        //Click on this button to Create an Account
         mCreateAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

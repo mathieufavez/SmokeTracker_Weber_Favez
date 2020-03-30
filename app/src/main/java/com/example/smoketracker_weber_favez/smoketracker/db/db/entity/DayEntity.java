@@ -12,7 +12,6 @@ import androidx.room.TypeConverters;
 import com.example.smoketracker_weber_favez.smoketracker.db.db.DateConverter;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity(tableName = "days",

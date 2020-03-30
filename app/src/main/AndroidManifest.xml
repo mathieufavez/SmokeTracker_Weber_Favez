@@ -9,9 +9,11 @@
         android:roundIcon="@drawable/logoicone"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
-        <activity android:name=".smoketracker.ui.ModifyInfoActivity"></activity>
+        <activity android:name=".smoketracker.ui.ShowHourActivity"></activity>
+        <activity android:name=".smoketracker.ui.ModifyHourActivity" />
+        <activity android:name=".smoketracker.ui.ModifyInfoActivity" />
         <activity android:name=".smoketracker.ui.Login_activity" />
-        <activity android:name=".smoketracker.ui.CreateDayActivity"/>
+        <activity android:name=".smoketracker.ui.CreateDayActivity" />
         <activity android:name=".smoketracker.ui.LoginMenuActivity" />
         <activity android:name=".smoketracker.ui.History_list_data_Activity" />
         <activity android:name=".smoketracker.ui.TrackingActivity" />

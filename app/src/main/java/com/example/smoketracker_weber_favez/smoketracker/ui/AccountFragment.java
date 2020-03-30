@@ -14,6 +14,8 @@ public class AccountFragment extends Fragment {
     private Button modifyButton;
     private Button modifyTablesButton;
 
+
+    //Page where the user can Modify his information, See all the tables in the DB
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -23,7 +25,6 @@ public class AccountFragment extends Fragment {
         modifyTablesButton = (Button) view.findViewById(R.id.button_modify_tables);
 
         String userEmailLogged = getActivity().getIntent().getStringExtra("loggedUserEmail");
-
 
         modifyButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -13,14 +13,16 @@ import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.smoketracker_weber_favez.smoketracker.db.db.dao.DayDao;
+import com.example.smoketracker_weber_favez.smoketracker.db.db.dao.HourDao;
 import com.example.smoketracker_weber_favez.smoketracker.db.db.dao.UserDao;
 import com.example.smoketracker_weber_favez.smoketracker.db.db.entity.DayEntity;
+import com.example.smoketracker_weber_favez.smoketracker.db.db.entity.HourEntity;
 import com.example.smoketracker_weber_favez.smoketracker.db.db.entity.UserEntity;
 
 
 import java.util.concurrent.Executors;
 
-@Database(entities = {UserEntity.class, DayEntity.class}, version = 17)
+@Database(entities = {UserEntity.class, DayEntity.class, HourEntity.class}, version = 21)
 @TypeConverters({DateConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
     private static final String TAG = "AppDatabase";
@@ -31,6 +33,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
     public abstract UserDao userDao();
     public abstract DayDao dayDao();
+    public abstract HourDao hourDao();
 
     private final MutableLiveData<Boolean> isDatabaseCreated = new MutableLiveData<>();
 

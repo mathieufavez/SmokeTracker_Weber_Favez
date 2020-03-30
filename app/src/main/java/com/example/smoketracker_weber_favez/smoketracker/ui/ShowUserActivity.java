@@ -38,6 +38,8 @@ public class ShowUserActivity extends AppCompatActivity {
 
     private UserEntity user;
 
+    //Page where the user can see the details of an User, delete it or update it
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

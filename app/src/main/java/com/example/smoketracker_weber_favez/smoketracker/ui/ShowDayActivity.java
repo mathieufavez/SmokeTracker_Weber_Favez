@@ -48,6 +48,8 @@ public class ShowDayActivity extends AppCompatActivity {
     private DayEntity day;
 
     private static DecimalFormat df2 = new DecimalFormat("#.##");
+
+    //Page where the user can see the details of a Day, delete it or update it
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -38,6 +38,8 @@ public class ModifyInfoActivity extends AppCompatActivity {
 
     private boolean isEditable;
 
+
+    //Here the user modifies his info, is similar as HomeActivity (CreateAccount)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

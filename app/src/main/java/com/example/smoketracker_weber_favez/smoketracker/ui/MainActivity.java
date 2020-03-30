@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable(){
                 @Override
                 public void run(){
+                    //Start the LoginMenuActivity
                     Intent homeIntent = new Intent(MainActivity.this, LoginMenuActivity.class);
                     startActivity(homeIntent);
                     finish();

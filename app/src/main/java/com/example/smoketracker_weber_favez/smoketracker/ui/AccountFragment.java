@@ -44,7 +44,6 @@ public class AccountFragment extends Fragment {
             }
         });
         return view;
-
     }
 
 }

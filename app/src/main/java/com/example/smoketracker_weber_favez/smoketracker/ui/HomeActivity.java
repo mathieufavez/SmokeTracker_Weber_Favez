@@ -140,6 +140,7 @@ public class HomeActivity extends AppCompatActivity {
             createDay(currentTime,1,0,0,0,email.getText().toString());
 
             Intent intent = new Intent(HomeActivity.this, TrackingActivity.class);
+            intent.putExtra("loggedUserEmail", email.getText().toString());
             startActivity(intent);
         }
     }
@@ -157,7 +158,6 @@ public class HomeActivity extends AppCompatActivity {
         user.setUser_quantity_per_packet(quantityPerPacket);
         user.setUser_smoke_per_day_limit(cigarettesSmokedPerDay);
 
-        //user.setId(userViewModel.getIdUserByEmail(email, this));
         userViewModel.createUser(user, new OnAsyncEventListener() {
             @Override
             public void onSuccess() {

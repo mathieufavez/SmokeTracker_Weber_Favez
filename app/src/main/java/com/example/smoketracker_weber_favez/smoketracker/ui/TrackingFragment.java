@@ -56,14 +56,14 @@ public class TrackingFragment extends Fragment {
         userViewModel.getUser().observe(this, userEntity -> {
             if (userEntity!=null) {
                 user = userEntity;
-                declareDayFactory(userEntity.getId());
+                declareDayFactory();
             }
         });
 
         return view;
     }
 
-    private void declareDayFactory(int userId){
+    private void declareDayFactory(){
         DayListOneUserViewEmailModel.Factory factoryDay = new DayListOneUserViewEmailModel.Factory(getActivity().getApplication(),user.getUser_email());
         dayViewModel = ViewModelProviders.of(this, factoryDay).get(DayListOneUserViewEmailModel.class);
         dayViewModel.getAllDaysForOneUser().observe(this, dayEntities -> {

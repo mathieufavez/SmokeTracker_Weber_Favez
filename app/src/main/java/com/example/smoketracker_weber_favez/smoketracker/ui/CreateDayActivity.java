@@ -1,8 +1,6 @@
 package com.example.smoketracker_weber_favez.smoketracker.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -28,8 +26,6 @@ public class CreateDayActivity extends AppCompatActivity {
     private DayViewEmailModel viewModel;
 
     private DayEntity day;
-
-    private int setIdAttribute;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,20 +56,19 @@ public class CreateDayActivity extends AppCompatActivity {
         });
     }
 
-    //Fonctionne pas
+
+    //Créer en boucle
     private void createDay(Date date, int dayNbr, int cigarettesSmoked, int cigarettesCraved, double moneySpent, String emailUser) {
         DayViewEmailModel.Factory factory = new DayViewEmailModel.Factory(getApplication(), emailUser);
         viewModel = ViewModelProviders.of(this, factory).get(DayViewEmailModel.class);
         viewModel.getDay().observe(this, dayEntity -> {
             if (dayEntity!=null) {
                 day = dayEntity;
-                setIdAttribute = dayEntity.getId()+1;
                 try {
                     day = new DayEntity();
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                day.setId(setIdAttribute);
                 day.setDate(date);
                 day.setDay_number(dayNbr);
                 day.setCigarettes_smoked_per_day(cigarettesSmoked);

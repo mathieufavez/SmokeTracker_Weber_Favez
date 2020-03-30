@@ -20,7 +20,7 @@ import com.example.smoketracker_weber_favez.smoketracker.db.db.entity.UserEntity
 
 import java.util.concurrent.Executors;
 
-@Database(entities = {UserEntity.class, DayEntity.class}, version = 14)
+@Database(entities = {UserEntity.class, DayEntity.class}, version = 17)
 @TypeConverters({DateConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
     private static final String TAG = "AppDatabase";

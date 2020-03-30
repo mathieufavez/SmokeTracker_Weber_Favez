@@ -22,10 +22,12 @@ import com.example.smoketracker_weber_favez.smoketracker.util.OnAsyncEventListen
 import com.example.smoketracker_weber_favez.smoketracker.viewmodel.Day.DayViewModel;
 import com.example.smoketracker_weber_favez.smoketracker.viewmodel.User.UserViewModel;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
+
 
 public class ShowDayActivity extends AppCompatActivity {
 
@@ -45,6 +47,7 @@ public class ShowDayActivity extends AppCompatActivity {
 
     private DayEntity day;
 
+    private static DecimalFormat df2 = new DecimalFormat("#.##");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -280,7 +283,7 @@ public class ShowDayActivity extends AppCompatActivity {
             dayNumber.setText(Integer.toString(day.getDay_number()));
             cigarettesSmokedPerDay.setText(Integer.toString(day.getCigarettes_smoked_per_day()));
             cigarettesCravedPerDay.setText(Integer.toString(day.getCigarettes_craved_per_day()));
-            moneySpentPerDay.setText(Double.toString(day.getMoney_saved_per_day()));
+            moneySpentPerDay.setText(df2.format(day.getMoney_saved_per_day()));
             userId.setText(Integer.toString(day.getUserId()));
             edit_userEmail_showday.setText(day.getUserEmail());
         }

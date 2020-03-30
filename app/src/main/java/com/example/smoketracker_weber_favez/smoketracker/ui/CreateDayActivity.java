@@ -61,33 +61,29 @@ public class CreateDayActivity extends AppCompatActivity {
     private void createDay(Date date, int dayNbr, int cigarettesSmoked, int cigarettesCraved, double moneySpent, String emailUser) {
         DayViewEmailModel.Factory factory = new DayViewEmailModel.Factory(getApplication(), emailUser);
         viewModel = ViewModelProviders.of(this, factory).get(DayViewEmailModel.class);
-        viewModel.getDay().observe(this, dayEntity -> {
-            if (dayEntity!=null) {
-                day = dayEntity;
-                try {
-                    day = new DayEntity();
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-                day.setDate(date);
-                day.setDay_number(dayNbr);
-                day.setCigarettes_smoked_per_day(cigarettesSmoked);
-                day.setCigarettes_craved_per_day(cigarettesCraved);
-                day.setMoney_saved_per_day(moneySpent);
-                day.setUserEmail(emailUser);
 
-                viewModel.createDay(day, new OnAsyncEventListener() {
-                    @Override
-                    public void onSuccess() {
-                        Log.d(TAG, "createDay: success");
-                        onBackPressed();
-                    }
+        try {
+            day = new DayEntity();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        day.setDate(date);
+        day.setDay_number(dayNbr);
+        day.setCigarettes_smoked_per_day(cigarettesSmoked);
+        day.setCigarettes_craved_per_day(cigarettesCraved);
+        day.setMoney_saved_per_day(moneySpent);
+        day.setUserEmail(emailUser);
 
-                    @Override
-                    public void onFailure(Exception e) {
-                        Log.e(TAG, "createDay: failure", e);
-                    }
-                });
+        viewModel.createDay(day, new OnAsyncEventListener() {
+            @Override
+            public void onSuccess() {
+                Log.d(TAG, "createDay: success");
+                onBackPressed();
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                Log.e(TAG, "createDay: failure", e);
             }
         });
     }

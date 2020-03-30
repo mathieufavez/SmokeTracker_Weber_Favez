@@ -14,6 +14,7 @@ import android.widget.EditText;
 
 import com.example.smoketracker_weber_favez.R;
 import com.example.smoketracker_weber_favez.smoketracker.db.db.entity.DayEntity;
+import com.example.smoketracker_weber_favez.smoketracker.db.db.entity.UserEntity;
 import com.example.smoketracker_weber_favez.smoketracker.util.OnAsyncEventListener;
 import com.example.smoketracker_weber_favez.smoketracker.viewmodel.Day.DayListOneUserViewEmailModel;
 import com.example.smoketracker_weber_favez.smoketracker.viewmodel.Day.DayViewEmailModel;
@@ -37,8 +38,8 @@ public class Login_activity extends AppCompatActivity {
     private DayViewEmailModel viewEmailModel;
     private DayListOneUserViewEmailModel dayViewModel;
 
+    private UserEntity user;
     private DayEntity day;
-    private boolean isSameDay;
     private int dayNumber;
 
     private Date currentTime = Calendar.getInstance().getTime();
@@ -59,14 +60,13 @@ public class Login_activity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+
         emailLogin = (EditText) findViewById(R.id.edit_text_email_connection);
         passwordLogin = (EditText) findViewById(R.id.edit_text_password_connection);
 
 
         buttonConnect = (Button) findViewById(R.id.button_connect);
         buttonConnect.setOnClickListener(view -> attemptLogin());
-
-
 
     }
 
@@ -103,10 +103,13 @@ public class Login_activity extends AppCompatActivity {
             dayViewModel = ViewModelProviders.of(this, factoryDay).get(DayListOneUserViewEmailModel.class);
             dayViewModel.getAllDaysForOneUser().observe(this, dayEntities -> {
                         if (dayEntities != null) {
-
-                                dayNumber = dayEntities.get(dayEntities.size() - 1).getDay_number()+1;
+                            if (dayEntities.size()<=0) {
+                                dayNumber = 1;
+                            }
+                            else {
+                                dayNumber = dayEntities.get(dayEntities.size() - 1).getDay_number() + 1;
                                 previousDate = dayEntities.get((dayEntities.size() - 1)).getDate();
-
+                            }
                         }
                     }
             );

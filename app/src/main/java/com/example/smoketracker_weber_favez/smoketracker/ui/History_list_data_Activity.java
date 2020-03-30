@@ -3,6 +3,8 @@ package com.example.smoketracker_weber_favez.smoketracker.ui;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -15,6 +17,7 @@ import com.example.smoketracker_weber_favez.smoketracker.viewmodel.Day.DayViewMo
 
 import org.w3c.dom.Text;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -36,6 +39,8 @@ public class History_list_data_Activity extends AppCompatActivity {
     private Date dateParse;
     private String stringParse;
 
+    private static DecimalFormat df2 = new DecimalFormat("#.##");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +60,7 @@ public class History_list_data_Activity extends AppCompatActivity {
                 date_history_day.setText(stringParse);
                 smoked_value_history.setText(Integer.toString(day.getCigarettes_smoked_per_day()));
                 craved_value_history.setText(Integer.toString(day.getCigarettes_craved_per_day()));
-                chf_spent_value_history.setText(Double.toString(day.getMoney_saved_per_day()));
+                chf_spent_value_history.setText(df2.format(day.getMoney_saved_per_day()));
             }
         });
 

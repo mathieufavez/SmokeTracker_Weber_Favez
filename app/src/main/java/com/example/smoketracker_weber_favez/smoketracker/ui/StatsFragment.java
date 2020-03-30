@@ -17,6 +17,7 @@ import com.example.smoketracker_weber_favez.smoketracker.viewmodel.Day.DayListOn
 import com.example.smoketracker_weber_favez.smoketracker.viewmodel.Day.DayListOneUserViewModel;
 import com.example.smoketracker_weber_favez.smoketracker.viewmodel.User.UserViewModel;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -40,6 +41,7 @@ public class StatsFragment extends Fragment {
     private double avgCigarettesCraved;
     private String userEmailLogged;
     private Date dateFirstDay;
+    private static DecimalFormat df2 = new DecimalFormat("#.##");
 
     @Nullable
     @Override
@@ -93,9 +95,9 @@ public class StatsFragment extends Fragment {
                 sinceday_textView.setText("Since " + formatedDate);
                 totalsmoked_value.setText(Integer.toString(cigarettesSmokedTotal));
                 totalcraved_value.setText(Integer.toString(cigarettesCravedTotal));
-                totalspent_value.setText(Double.toString(moneySpentTotal));
-                avgsmoked_value.setText(Double.toString(avgCigarettesSmoked));
-                avgcraved_value.setText(Double.toString(avgCigarettesCraved));
+                totalspent_value.setText(df2.format(moneySpentTotal));
+                avgsmoked_value.setText(df2.format(avgCigarettesSmoked));
+                avgcraved_value.setText(df2.format(avgCigarettesCraved));
 
 
             }

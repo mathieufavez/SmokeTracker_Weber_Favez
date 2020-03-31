@@ -36,6 +36,11 @@ public class DayRepository {
         public LiveData<DayEntity> getOneDayWithEmail(final String email, Context context){
             return AppDatabase.getInstance(context).dayDao().getOneDay(email);
         }
+
+        public LiveData<DayEntity> getOneDaySpecific(String userEmail, int dayId, Context context){
+                return AppDatabase.getInstance(context).dayDao().getOneDaySpecific(userEmail, dayId);
+        }
+
         public LiveData<List<DayEntity>> getAllDays(Context context) {
             return AppDatabase.getInstance(context).dayDao().getAllDays();
         }

@@ -21,6 +21,9 @@ public interface DayDao {
     @Query("SELECT * FROM days WHERE userEmail = :userEmail")
     LiveData<DayEntity> getOneDay(String userEmail);
 
+    @Query("SELECT * FROM days WHERE userEmail = :userEmail AND id= :dayId")
+    LiveData<DayEntity> getOneDaySpecific(String userEmail, int dayId);
+
     @Query("SELECT * FROM days")
     LiveData<List<DayEntity>> getAllDays();
 

@@ -18,9 +18,9 @@ import com.example.smoketracker_weber_favez.smoketracker.db.db.entity.HourEntity
 import com.example.smoketracker_weber_favez.smoketracker.db.db.entity.UserEntity;
 import com.example.smoketracker_weber_favez.smoketracker.util.OnAsyncEventListener;
 import com.example.smoketracker_weber_favez.smoketracker.viewmodel.Day.DayListOneUserViewEmailModel;
+import com.example.smoketracker_weber_favez.smoketracker.viewmodel.Day.DaySpecificViewModel;
 import com.example.smoketracker_weber_favez.smoketracker.viewmodel.Day.DayViewEmailModel;
 import com.example.smoketracker_weber_favez.smoketracker.viewmodel.Hour.HourViewModel;
-import com.example.smoketracker_weber_favez.smoketracker.viewmodel.Hour.ListHourViewModel;
 import com.example.smoketracker_weber_favez.smoketracker.viewmodel.User.UserViewModel;
 
 import java.text.DecimalFormat;
@@ -49,8 +49,8 @@ public class TrackingFragment extends Fragment {
 
     private UserViewModel userViewModel;
     private DayListOneUserViewEmailModel dayViewModel;
-    private DayViewEmailModel viewModel;
     private HourViewModel hourViewModel;
+    private DaySpecificViewModel daySpecificViewModel;
 
     private UserEntity user;
     private DayEntity dayCraved;
@@ -153,14 +153,16 @@ public class TrackingFragment extends Fragment {
             }
         });
 
-        DayViewEmailModel.Factory factory2 = new DayViewEmailModel.Factory(getActivity().getApplication(), user.getUser_email());
-        viewModel = ViewModelProviders.of(this, factory2).get(DayViewEmailModel.class);
-        viewModel.getDay().observe(this, dayEntity -> {
+        DaySpecificViewModel.Factory factory2 = new DaySpecificViewModel.Factory(getActivity().getApplication(), user.getUser_email(),days.get(days.size()-1).getId());
+        daySpecificViewModel = ViewModelProviders.of(this, factory2).get(DaySpecificViewModel.class);
+        daySpecificViewModel.getSpecifiDay().observe(this, dayEntity -> {
             if (dayEntity != null) {
                 dayCraved = dayEntity;
                 dayCraved.setCigarettes_craved_per_day(days.get(days.size() - 1).getCigarettes_craved_per_day() + 1);
+                dayCraved.setCigarettes_smoked_per_day(days.get(days.size()-1).getCigarettes_smoked_per_day());
+                dayCraved.setMoney_saved_per_day(days.get(days.size()-1).getMoney_saved_per_day());
 
-                viewModel.updateDay(dayCraved, new OnAsyncEventListener() {
+                daySpecificViewModel.updateDay(dayCraved, new OnAsyncEventListener() {
                     @Override
                     public void onSuccess() {
                         Log.d(TAG_AddCraved, "addCraved: success");
@@ -171,7 +173,7 @@ public class TrackingFragment extends Fragment {
                         Log.d(TAG_AddCraved, "addCraved: failure");
                     }
                 });
-                viewModel.getDay().removeObservers(this);
+                daySpecificViewModel.getSpecifiDay().removeObservers(this);
             }
         });
 
@@ -218,30 +220,31 @@ public class TrackingFragment extends Fragment {
             }
         });
 
-        DayViewEmailModel.Factory factory2 = new DayViewEmailModel.Factory(getActivity().getApplication(), user.getUser_email());
-        viewModel = ViewModelProviders.of(this, factory2).get(DayViewEmailModel.class);
-        viewModel.getDay().observe(this, dayEntity -> {
+        DaySpecificViewModel.Factory factory2 = new DaySpecificViewModel.Factory(getActivity().getApplication(), user.getUser_email(), days.get(days.size()-1).getId());
+        daySpecificViewModel = ViewModelProviders.of(this, factory2).get(DaySpecificViewModel.class);
+        daySpecificViewModel.getSpecifiDay().observe(this, dayEntity -> {
             if (dayEntity != null) {
                 daySmoke = dayEntity;
 
                 daySmoke.setCigarettes_smoked_per_day(days.get(days.size() - 1).getCigarettes_smoked_per_day() + 1);
+                daySmoke.setCigarettes_craved_per_day(days.get(days.size()-1).getCigarettes_craved_per_day());
 
                 depenseSmokeOneCigarette = user.getUser_packet_price() / user.getUser_quantity_per_packet();
                 totalDepenseSmoke += depenseSmokeOneCigarette;
                 daySmoke.setMoney_saved_per_day(totalDepenseSmoke);
 
-                viewModel.updateDay(daySmoke, new OnAsyncEventListener() {
+                daySpecificViewModel.updateDay(daySmoke, new OnAsyncEventListener() {
                     @Override
                     public void onSuccess() {
-                        Log.d(TAG_AddSmoked, "addSmokedDay: success");
+                        Log.d(TAG_AddSmoked, "addSmoked: success");
                     }
 
                     @Override
                     public void onFailure(Exception e) {
-                        Log.d(TAG_AddSmoked, "addSmokedDay: failure");
+                        Log.d(TAG_AddSmoked, "addSmoked: failure");
                     }
                 });
-                viewModel.getDay().removeObservers(this);
+                daySpecificViewModel.getSpecifiDay().removeObservers(this);
             }
         });
     }

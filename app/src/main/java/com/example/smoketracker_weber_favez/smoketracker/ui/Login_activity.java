@@ -28,7 +28,6 @@ import java.util.Date;
 public class Login_activity extends AppCompatActivity {
     private static final String TAG = "Login_Activity";
 
-
     private Button buttonConnect;
 
     private EditText emailLogin;

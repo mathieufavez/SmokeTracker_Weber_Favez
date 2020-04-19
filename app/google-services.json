@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "795443727137",
+    "firebase_url": "https://smoketracker-e987d.firebaseio.com",
+    "project_id": "smoketracker-e987d",
+    "storage_bucket": "smoketracker-e987d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:795443727137:android:34c66b970883b4228f0c60",
+        "android_client_info": {
+          "package_name": "com.example.smoketracker_weber_favez"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "795443727137-hoije174j2iqdvsqat3jnaquq9oqnt7j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.smoketracker_weber_favez",
+            "certificate_hash": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+          }
+        },
+        {
+          "client_id": "795443727137-7tr9f512ae5i0gkk0cfni252ceqk72b6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjttvg6akv4Mvoaua9vi8hDIry4nOLlys"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "795443727137-7tr9f512ae5i0gkk0cfni252ceqk72b6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

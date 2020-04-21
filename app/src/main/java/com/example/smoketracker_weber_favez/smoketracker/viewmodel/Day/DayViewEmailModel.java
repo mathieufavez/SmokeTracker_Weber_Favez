@@ -70,12 +70,12 @@ public class DayViewEmailModel extends AndroidViewModel {
         return observableClient;
     }
 
-    public void createDay(DayEntity day, OnAsyncEventListener callback) {
-        repository.insert(day, callback);
+    public void createDay(DayEntity day, String idUser,OnAsyncEventListener callback) {
+        repository.insert(day, idUser, callback);
     }
 
-    public void updateDay(DayEntity day, OnAsyncEventListener callback) {
-        repository.update(day, callback);
+    public void updateDay(DayEntity day, String userId, String dayId, OnAsyncEventListener callback) {
+        repository.update(day,userId,dayId,callback);
     }
 
     public void deleteDay(DayEntity day, OnAsyncEventListener callback) {

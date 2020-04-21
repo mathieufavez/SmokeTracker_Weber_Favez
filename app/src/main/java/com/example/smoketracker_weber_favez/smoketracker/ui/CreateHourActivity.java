@@ -47,7 +47,9 @@ public class CreateHourActivity extends AppCompatActivity {
                     createDay(
                             formatedHour,
                             edit_description_showhour.getText().toString(),
-                            edit_dayId_showhour.getText().toString()
+                            edit_dayId_showhour.getText().toString(),
+                            "test"
+
                     );
                 } catch (ParseException e) {
                     e.printStackTrace();
@@ -56,7 +58,7 @@ public class CreateHourActivity extends AppCompatActivity {
         });
     }
 
-    private void createDay(Date heure, String description, String dayId) {
+    private void createDay(Date heure, String description, String dayId, String userId) {
         HourViewModel.Factory factory = new HourViewModel.Factory(getApplication(), dayId);
         viewModel = ViewModelProviders.of(this, factory).get(HourViewModel.class);
 
@@ -66,7 +68,7 @@ public class CreateHourActivity extends AppCompatActivity {
         hour.setIdDay(dayId);
 
 
-        viewModel.createHour(hour, new OnAsyncEventListener() {
+        viewModel.createHour(hour,userId,dayId ,new OnAsyncEventListener() {
             @Override
             public void onSuccess() {
                 Log.d(TAG, "createHour: success");

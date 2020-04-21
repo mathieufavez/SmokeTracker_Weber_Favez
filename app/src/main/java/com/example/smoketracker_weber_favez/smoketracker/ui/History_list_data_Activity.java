@@ -26,6 +26,8 @@ import java.util.Map;
 public class History_list_data_Activity extends AppCompatActivity {
 
     private String dayId;
+    private String userId;
+
     private DayViewModel viewModel;
     private ListHourViewModel listHourViewModel;
 
@@ -59,8 +61,8 @@ public class History_list_data_Activity extends AppCompatActivity {
         initateView();
 
         dayId = getIntent().getStringExtra("DayID");
-
-        DayViewModel.Factory factoryDay = new DayViewModel.Factory(getApplication(), dayId);
+        userId = getIntent().getStringExtra("UserID");
+        DayViewModel.Factory factoryDay = new DayViewModel.Factory(getApplication(),userId, dayId);
         viewModel = ViewModelProviders.of(this, factoryDay).get(DayViewModel.class);
         viewModel.getDay().observe(this, dayEntity -> {
             if (dayEntity != null) {
@@ -75,8 +77,7 @@ public class History_list_data_Activity extends AppCompatActivity {
 
                 //Pour les heures de Smoked et Craved
                 //Il faut retenir le temps au moment ou on clique sur le bouton et quel bouton c'est pour ensuite récupérer ces infos et les mettre ici dans la hashmap
-
-                ListHourViewModel.Factory factoryHour = new ListHourViewModel.Factory(getApplication(), dayId);
+                ListHourViewModel.Factory factoryHour = new ListHourViewModel.Factory(getApplication(), userId, dayId);
                 listHourViewModel = ViewModelProviders.of(this, factoryHour).get(ListHourViewModel.class);
                 listHourViewModel.getAllHoursForOneDay().observe(this, hourEntities -> {
 

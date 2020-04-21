@@ -31,9 +31,13 @@ public class HourRepository {
         return instance;
     }
 
-    public LiveData<List<HourEntity>> getAllHoursForOneDay(final String id) {
+    public LiveData<List<HourEntity>> getAllHoursForOneDay(final String idUser, final String idDay) {
         DatabaseReference reference = FirebaseDatabase.getInstance()
-                .getReference("hours");
+                .getReference("users")
+                .child(idUser)
+                .child("days")
+                .child(idDay)
+                .child("hours");
         return new HourListLiveData(reference);
     }
 
@@ -55,10 +59,14 @@ public class HourRepository {
         new CreateHour(context,callback).execute(hour);
     }*/
 
-    public void insert(final HourEntity hour, final OnAsyncEventListener callback) {
+    public void insert(final HourEntity hour, String idUser, String idDay, final OnAsyncEventListener callback) {
         String id = FirebaseDatabase.getInstance().getReference("hours").push().getKey();
         FirebaseDatabase.getInstance()
-                .getReference("hours")
+                .getReference("users")
+                .child(idUser)
+                .child("days")
+                .child(idDay)
+                .child("hours")
                 .child(id)
                 .setValue(hour, (databaseError, databaseReference) -> {
                     if (databaseError != null) {

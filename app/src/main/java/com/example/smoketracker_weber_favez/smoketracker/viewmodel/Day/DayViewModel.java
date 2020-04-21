@@ -24,7 +24,7 @@ public class DayViewModel extends AndroidViewModel {
     private final MediatorLiveData<DayEntity> observableClient;
 
     public DayViewModel(@NonNull Application application,
-                         final String id, DayRepository dayRepository) {
+                         final String idUser, final String idDay, DayRepository dayRepository) {
         super(application);
 
         repository = dayRepository;
@@ -35,7 +35,7 @@ public class DayViewModel extends AndroidViewModel {
         // set by default null, until we get data from the database.
         observableClient.setValue(null);
 
-        LiveData<DayEntity> day = repository.getOneDay(id);
+        LiveData<DayEntity> day = repository.getOneDay(idUser, idDay);
 
         // observe the changes of the client entity from the database and forward them
         observableClient.addSource(day, observableClient::setValue);
@@ -46,20 +46,23 @@ public class DayViewModel extends AndroidViewModel {
         @NonNull
         private final Application application;
 
-        private final String id;
+        private final String idUser;
+
+        private final String idDay;
 
         private final DayRepository repository;
 
-        public Factory(@NonNull Application application, String dayId) {
+        public Factory(@NonNull Application application, String idUser, String idDay) {
             this.application = application;
-            this.id = dayId;
+            this.idUser = idUser;
+            this.idDay = idDay;
             repository = DayRepository.getInstance();
         }
 
         @Override
         public <T extends ViewModel> T create(Class<T> modelClass) {
             //noinspection unchecked
-            return (T) new DayViewModel(application, id, repository);
+            return (T) new DayViewModel(application, idUser, idDay, repository);
         }
     }
 
@@ -70,12 +73,12 @@ public class DayViewModel extends AndroidViewModel {
         return observableClient;
     }
 
-    public void createDay(DayEntity day, OnAsyncEventListener callback) {
-        repository.insert(day, callback);
+    public void createDay(DayEntity day, String idUser, OnAsyncEventListener callback) {
+        repository.insert(day, idUser,callback);
     }
 
-    public void updateDay(DayEntity day, OnAsyncEventListener callback) {
-        repository.update(day, callback);
+    public void updateDay(DayEntity day, String userId,String dayId,OnAsyncEventListener callback) {
+        repository.update(day, dayId, userId,callback);
     }
 
     public void deleteDay(DayEntity day, OnAsyncEventListener callback) {

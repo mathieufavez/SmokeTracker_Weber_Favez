@@ -49,6 +49,8 @@ public class HistoryFragment extends Fragment {
     private Date dateParse;
     private String stringParse;
 
+    private String userEmailLogged;
+
     //page where we can see all the days with the date in a ListView
     //WHen we click on a listView, it goes on the respective day and we have statistiques about this unique day
     @Override
@@ -57,7 +59,7 @@ public class HistoryFragment extends Fragment {
 
         listView = (ListView) view.findViewById(R.id.date_listview);
 
-        String userEmailLogged = getActivity().getIntent().getStringExtra("loggedUserEmail");
+        userEmailLogged = getActivity().getIntent().getStringExtra("loggedUserEmail");
 
         days = new ArrayList<>();
 
@@ -124,6 +126,7 @@ public class HistoryFragment extends Fragment {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Intent intent = new Intent(getContext(),History_list_data_Activity.class);
                         intent.putExtra("DayID", days.get(position).getId());
+                        intent.putExtra("UserID",userEmailLogged );
                         startActivity(intent);
                     }
                 });

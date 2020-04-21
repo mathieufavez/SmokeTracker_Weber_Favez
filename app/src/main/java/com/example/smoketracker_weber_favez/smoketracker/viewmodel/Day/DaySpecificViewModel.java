@@ -24,7 +24,7 @@ public class DaySpecificViewModel extends AndroidViewModel {
     private final MediatorLiveData<DayEntity> observableClient;
 
     public DaySpecificViewModel(@NonNull Application application,
-                             final String email, final String dayId, DayRepository dayRepository) {
+                             final String userId, final String dayId, DayRepository dayRepository) {
         super(application);
 
         repository = dayRepository;
@@ -35,7 +35,7 @@ public class DaySpecificViewModel extends AndroidViewModel {
         // set by default null, until we get data from the database.
         observableClient.setValue(null);
 
-        LiveData<DayEntity> day = repository.getOneDaySpecific(email,dayId);
+        LiveData<DayEntity> day = repository.getOneDaySpecific(userId,dayId);
 
         // observe the changes of the client entity from the database and forward them
         observableClient.addSource(day, observableClient::setValue);
@@ -46,15 +46,15 @@ public class DaySpecificViewModel extends AndroidViewModel {
         @NonNull
         private final Application application;
 
-        private final String email;
+        private final String userId;
 
         private final String id;
 
         private final DayRepository repository;
 
-        public Factory(@NonNull Application application, String userEmail, String idDay) {
+        public Factory(@NonNull Application application, String userId, String idDay) {
             this.application = application;
-            this.email = userEmail;
+            this.userId = userId;
             this.id = idDay;
             repository = DayRepository.getInstance();
         }
@@ -62,7 +62,7 @@ public class DaySpecificViewModel extends AndroidViewModel {
         @Override
         public <T extends ViewModel> T create(Class<T> modelClass) {
             //noinspection unchecked
-            return (T) new DaySpecificViewModel(application, email, id, repository);
+            return (T) new DaySpecificViewModel(application, userId, id, repository);
         }
     }
 
@@ -74,12 +74,12 @@ public class DaySpecificViewModel extends AndroidViewModel {
         return observableClient;
     }
 
-    public void createDay(DayEntity day, OnAsyncEventListener callback) {
-        repository.insert(day, callback);
+    public void createDay(DayEntity day, String idUser, OnAsyncEventListener callback) {
+        repository.insert(day,idUser, callback);
     }
 
-    public void updateDay(DayEntity day, OnAsyncEventListener callback) {
-        repository.update(day, callback);
+    public void updateDay(DayEntity day, String userId,String dayId,OnAsyncEventListener callback) {
+        repository.update(day, userId,dayId,callback);
     }
 
     public void deleteDay(DayEntity day, OnAsyncEventListener callback) {

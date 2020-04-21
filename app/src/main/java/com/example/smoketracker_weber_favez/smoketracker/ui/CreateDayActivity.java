@@ -71,7 +71,7 @@ public class CreateDayActivity extends AppCompatActivity {
         day.setMoney_saved_per_day(moneySpent);
         day.setUserEmail(emailUser);
 
-        viewModel.createDay(day, new OnAsyncEventListener() {
+        viewModel.createDay(day, emailUser,new OnAsyncEventListener() {
             @Override
             public void onSuccess() {
                 Log.d(TAG, "createDay: success");

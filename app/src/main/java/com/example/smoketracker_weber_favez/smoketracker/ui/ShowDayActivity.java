@@ -55,14 +55,14 @@ public class ShowDayActivity extends AppCompatActivity {
 
         String idDay = getIntent().getStringExtra("dayId");
 
-        DayViewModel.Factory factory = new DayViewModel.Factory(getApplication(),idDay);
+        /*DayViewModel.Factory factory = new DayViewModel.Factory(getApplication(),idDay);
         viewModel = ViewModelProviders.of(this, factory).get(DayViewModel.class);
         viewModel.getDay().observe(this, dayEntity -> {
             if (dayEntity!=null) {
                 day = dayEntity;
                 updateContent();
             }
-        });
+        });*/
     }
 
     @Override
@@ -161,7 +161,7 @@ public class ShowDayActivity extends AppCompatActivity {
             String datee =  date.getText().toString();
             Date formatedDate = new SimpleDateFormat("dd-MM-yyyy").parse(datee);
 
-            saveChanges(
+            /*saveChanges(
                     formatedDate,
                     Integer.parseInt(dayNumber.getText().toString()),
                     Integer.parseInt(cigarettesSmokedPerDay.getText().toString()),
@@ -170,7 +170,7 @@ public class ShowDayActivity extends AppCompatActivity {
                     userId.getText().toString(),
                     edit_userEmail_showday.getText().toString()
 
-            );
+            );*/
 
             date.setFocusable(false);
             date.setEnabled(false);
@@ -245,7 +245,7 @@ public class ShowDayActivity extends AppCompatActivity {
         day.setUserId(userId);
         day.setUserEmail(userEmail);
 
-        viewModel.updateDay(day, new OnAsyncEventListener() {
+        /*viewModel.updateDay(day,userId, new OnAsyncEventListener() {
             @Override
             public void onSuccess() {
                 Log.d(TAG, "updateDay: success");
@@ -258,7 +258,7 @@ public class ShowDayActivity extends AppCompatActivity {
                 Log.e(TAG, "updateDay: failure", e);
                 setResponse(false);
             }
-        });
+        });*/
     }
 
     private void setResponse(Boolean response) {

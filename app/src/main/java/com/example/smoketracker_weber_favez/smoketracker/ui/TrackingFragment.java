@@ -50,7 +50,6 @@ public class TrackingFragment extends Fragment {
 
     private UserViewModel userViewModel;
     private DayListOneUserViewEmailModel dayViewModel;
-    private DayListViewModel dayViewModel2;
     private HourViewModel hourViewModel;
     private DaySpecificViewModel daySpecificViewModel;
 
@@ -73,6 +72,9 @@ public class TrackingFragment extends Fragment {
     private static DecimalFormat df2 = new DecimalFormat("#.##");
 
 
+    private String userEmailLogged;
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -83,7 +85,7 @@ public class TrackingFragment extends Fragment {
         days = new ArrayList<>();
 
         //We take the email of the user logged
-        String userEmailLogged = getActivity().getIntent().getStringExtra("loggedUserEmail");
+        userEmailLogged = getActivity().getIntent().getStringExtra("loggedUserEmail");
 
         UserViewModel.Factory factory = new UserViewModel.Factory(getActivity().getApplication(), userEmailLogged);
         userViewModel = ViewModelProviders.of(this, factory).get(UserViewModel.class);
@@ -133,7 +135,7 @@ public class TrackingFragment extends Fragment {
                 hour.setDescription("Craved");
                 hour.setIdDay(days.get(days.size()-1).getId());
 
-                hourViewModel.createHour(hour, new OnAsyncEventListener() {
+                hourViewModel.createHour(hour,userEmailLogged,days.get(days.size()-1).getId(), new OnAsyncEventListener() {
                     @Override
                     public void onSuccess() {
                         Log.d(TAG_AddHourCraved, "addHourCraved: success");
@@ -147,16 +149,7 @@ public class TrackingFragment extends Fragment {
                 hourViewModel.getHour().removeObservers(this);
         });
 
-
-
-        DayListOneUserViewEmailModel.Factory factoryDay = new DayListOneUserViewEmailModel.Factory(getActivity().getApplication(), user.getId());
-        dayViewModel = ViewModelProviders.of(this, factoryDay).get(DayListOneUserViewEmailModel.class);
-        dayViewModel.getAllDaysForOneUser().observe(this, dayEntities -> {
-            if (dayEntities != null) {
-            }
-        });
-
-        DaySpecificViewModel.Factory factory2 = new DaySpecificViewModel.Factory(getActivity().getApplication(), user.getUser_email(),days.get(days.size()-1).getId());
+        DaySpecificViewModel.Factory factory2 = new DaySpecificViewModel.Factory(getActivity().getApplication(), userEmailLogged,days.get(days.size()-1).getId());
         daySpecificViewModel = ViewModelProviders.of(this, factory2).get(DaySpecificViewModel.class);
         daySpecificViewModel.getSpecifiDay().observe(this, dayEntity -> {
             if (dayEntity != null) {
@@ -165,7 +158,7 @@ public class TrackingFragment extends Fragment {
                 dayCraved.setCigarettes_smoked_per_day(days.get(days.size()-1).getCigarettes_smoked_per_day());
                 dayCraved.setMoney_saved_per_day(days.get(days.size()-1).getMoney_saved_per_day());
 
-                daySpecificViewModel.updateDay(dayCraved, new OnAsyncEventListener() {
+                daySpecificViewModel.updateDay(dayCraved, userEmailLogged,dayEntity.getId(),new OnAsyncEventListener() {
                     @Override
                     public void onSuccess() {
                         Log.d(TAG_AddCraved, "addCraved: success");
@@ -184,7 +177,6 @@ public class TrackingFragment extends Fragment {
 
     //Create the hour
     private void addSmoked() {
-
         HourViewModel.Factory factory = new HourViewModel.Factory(getActivity().getApplication(), days.get(days.size()-1).getId());
         hourViewModel = ViewModelProviders.of(this, factory).get(HourViewModel.class);
         hourViewModel.getHour().observe(this, hourEntity -> {
@@ -202,7 +194,7 @@ public class TrackingFragment extends Fragment {
             hour.setDescription("Smoked");
             hour.setIdDay(days.get(days.size()-1).getId());
 
-            hourViewModel.createHour(hour, new OnAsyncEventListener() {
+            hourViewModel.createHour(hour, userEmailLogged,days.get(days.size()-1).getId(),new OnAsyncEventListener() {
                 @Override
                 public void onSuccess() {
                     Log.d(TAG_AddHourSmoked, "addHourSmoked: success");
@@ -217,14 +209,8 @@ public class TrackingFragment extends Fragment {
         });
 
         cigaretteLimit -= 1;
-        DayListOneUserViewEmailModel.Factory factoryDay = new DayListOneUserViewEmailModel.Factory(getActivity().getApplication(), user.getId());
-        dayViewModel = ViewModelProviders.of(this, factoryDay).get(DayListOneUserViewEmailModel.class);
-        dayViewModel.getAllDaysForOneUser().observe(this, dayEntities -> {
-            if (dayEntities != null) {
-            }
-        });
 
-        DaySpecificViewModel.Factory factory2 = new DaySpecificViewModel.Factory(getActivity().getApplication(), user.getUser_email(), days.get(days.size()-1).getId());
+        DaySpecificViewModel.Factory factory2 = new DaySpecificViewModel.Factory(getActivity().getApplication(), userEmailLogged, days.get(days.size()-1).getId());
         daySpecificViewModel = ViewModelProviders.of(this, factory2).get(DaySpecificViewModel.class);
         daySpecificViewModel.getSpecifiDay().observe(this, dayEntity -> {
             if (dayEntity != null) {
@@ -237,7 +223,7 @@ public class TrackingFragment extends Fragment {
                 totalDepenseSmoke += depenseSmokeOneCigarette;
                 daySmoke.setMoney_saved_per_day(totalDepenseSmoke);
 
-                daySpecificViewModel.updateDay(daySmoke, new OnAsyncEventListener() {
+                daySpecificViewModel.updateDay(daySmoke, userEmailLogged,dayEntity.getId(), new OnAsyncEventListener() {
                     @Override
                     public void onSuccess() {
                         Log.d(TAG_AddSmoked, "addSmoked: success");
@@ -254,9 +240,9 @@ public class TrackingFragment extends Fragment {
     }
 
     private void declareDayFactory() {
-        DayListViewModel.Factory factoryDay = new DayListViewModel.Factory(getActivity().getApplication());
-        dayViewModel2 = ViewModelProviders.of(this, factoryDay).get(DayListViewModel.class);
-        dayViewModel2.getAllDays().observe(this, dayEntities -> {
+        DayListOneUserViewEmailModel.Factory factoryDay = new DayListOneUserViewEmailModel.Factory(getActivity().getApplication(),userEmailLogged);
+        dayViewModel = ViewModelProviders.of(this, factoryDay).get(DayListOneUserViewEmailModel.class);
+        dayViewModel.getAllDaysForOneUser().observe(this, dayEntities -> {
             if (dayEntities != null) {
                 days = dayEntities;
                 day_textView.setText("Day " + Integer.toString(days.get(days.size()-1).getDay_number()));

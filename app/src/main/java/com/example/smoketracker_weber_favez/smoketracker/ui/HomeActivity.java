@@ -1,5 +1,6 @@
 package com.example.smoketracker_weber_favez.smoketracker.ui;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 import android.content.Intent;
@@ -18,6 +19,11 @@ import com.example.smoketracker_weber_favez.smoketracker.db.db.repository.UserRe
 import com.example.smoketracker_weber_favez.smoketracker.util.OnAsyncEventListener;
 import com.example.smoketracker_weber_favez.smoketracker.viewmodel.Day.DayViewEmailModel;
 import com.example.smoketracker_weber_favez.smoketracker.viewmodel.User.UserViewModel;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -44,6 +50,8 @@ public class HomeActivity extends AppCompatActivity {
 
     private String idUser;
 
+    private FirebaseAuth mAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +60,7 @@ public class HomeActivity extends AppCompatActivity {
         days = new ArrayList<>();
 
         updateContent();
-
+        mAuth = FirebaseAuth.getInstance();
         mNextButton = (Button) findViewById(R.id.button_next_homeActivity);
 
         lastname = (EditText) findViewById(R.id.edit_lastname_input);
@@ -143,7 +151,7 @@ public class HomeActivity extends AppCompatActivity {
                     Integer.parseInt(cigarettesSmokedPerDay.getText().toString()));
 
             //and we also create a day linked to him
-            createDay(currentTime,1,0,0,0,email.getText().toString());
+            createDay(currentTime,1,0,0,0,email.getText().toString(), idUser);
 
             //Then we go to the TrackingActivity and we pass it the email of the user
             Intent intent = new Intent(HomeActivity.this, TrackingActivity.class);
@@ -181,10 +189,25 @@ public class HomeActivity extends AppCompatActivity {
                 Log.d(TAG, "createUserWithEmail: failure", e);
             }
         });
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "createUserWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                        }
+                    }
+                });
+
     }
 
     //Create a day
-    private void createDay(Date date, int dayNumber, int cigarettesSmoked, int cigarettesCraved, double moneySaved, String userEmail) throws ParseException {
+    private void createDay(Date date, int dayNumber, int cigarettesSmoked, int cigarettesCraved, double moneySaved, String userEmail, String idUser) throws ParseException {
 
         String formatedDate = new SimpleDateFormat("dd-MM-yyyy").format(date);
 
@@ -198,7 +221,7 @@ public class HomeActivity extends AppCompatActivity {
         day.setMoney_saved_per_day(moneySaved);
         day.setUserEmail(userEmail);
 
-        dayViewModel.createDay(day, new OnAsyncEventListener() {
+        dayViewModel.createDay(day, idUser, new OnAsyncEventListener() {
             @Override
             public void onSuccess() {
                 Log.d(TAG, "createDay: success");

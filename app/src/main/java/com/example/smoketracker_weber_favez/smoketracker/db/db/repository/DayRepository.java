@@ -12,10 +12,12 @@ import com.example.smoketracker_weber_favez.smoketracker.db.db.firebase.DayLiveD
 import com.example.smoketracker_weber_favez.smoketracker.db.db.firebase.UserListLiveData;
 import com.example.smoketracker_weber_favez.smoketracker.db.db.firebase.UserLiveData;
 import com.example.smoketracker_weber_favez.smoketracker.util.OnAsyncEventListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
+import java.util.Objects;
 
 public class DayRepository {
     private static DayRepository instance;
@@ -33,10 +35,12 @@ public class DayRepository {
             return instance;
         }
 
-        public LiveData<DayEntity> getOneDay(final String id){
+        public LiveData<DayEntity> getOneDay(final String idUser, final String idDay){
             DatabaseReference reference = FirebaseDatabase.getInstance()
-                    .getReference("days")
-                    .child(id);
+                    .getReference("users")
+                    .child(idUser)
+                    .child("days")
+                    .child(idDay);
             return new DayLiveData(reference);
         }
 
@@ -47,9 +51,11 @@ public class DayRepository {
             return new DayLiveData(reference);
         }
 
-        public LiveData<DayEntity> getOneDaySpecific(String userEmail, String dayId){
+        public LiveData<DayEntity> getOneDaySpecific(String idUser, String dayId){
             DatabaseReference reference = FirebaseDatabase.getInstance()
-                    .getReference("days")
+                    .getReference("users")
+                    .child(idUser)
+                    .child("days")
                     .child(dayId);
             return new DayLiveData(reference);
         }
@@ -62,7 +68,9 @@ public class DayRepository {
 
     public LiveData<List<DayEntity>> getAllDaysForOneUser(final String id) {
             DatabaseReference reference = FirebaseDatabase.getInstance()
-                    .getReference("days");
+                    .getReference("users")
+                    .child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid())
+                    .child("days");
             return new DayListLiveData(reference);
         }
 
@@ -74,10 +82,12 @@ public class DayRepository {
             new CreateDay(context,callback).execute(day);
         }*/
 
-        public void insert(final DayEntity day, final OnAsyncEventListener callback) {
+        public void insert(final DayEntity day, String userId, final OnAsyncEventListener callback) {
             String id = FirebaseDatabase.getInstance().getReference("days").push().getKey();
             FirebaseDatabase.getInstance()
-                    .getReference("days")
+                    .getReference("users")
+                    .child(userId)
+                    .child("days")
                     .child(id)
                     .setValue(day, (databaseError, databaseReference) -> {
                         if (databaseError != null) {
@@ -93,10 +103,12 @@ public class DayRepository {
             new UpdateDay(context, callback).execute(day);
         }*/
 
-        public void update(final DayEntity day, final OnAsyncEventListener callback) {
+        public void update(final DayEntity day, String userId, String dayId, final OnAsyncEventListener callback) {
             FirebaseDatabase.getInstance()
-                    .getReference("days")
-                    .child(day.getId())
+                    .getReference("users")
+                    .child(userId)
+                    .child("days")
+                    .child(dayId)
                     .updateChildren(day.toMap(), (databaseError, databaseReference) -> {
                         if (databaseError != null) {
                             callback.onFailure(databaseError.toException());

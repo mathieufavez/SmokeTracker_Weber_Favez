@@ -71,8 +71,8 @@ public class HourViewModel extends AndroidViewModel {
         return observableClient;
     }
 
-    public void createHour(HourEntity hour, OnAsyncEventListener callback) {
-        repository.insert(hour, callback);
+    public void createHour(HourEntity hour,String idUser,String idDay, OnAsyncEventListener callback) {
+        repository.insert(hour, idUser, idDay,callback);
     }
 
     public void updateHour(HourEntity hour, OnAsyncEventListener callback) {

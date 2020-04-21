@@ -3,21 +3,16 @@ package com.example.smoketracker_weber_favez.smoketracker.ui;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.example.smoketracker_weber_favez.R;
-import com.example.smoketracker_weber_favez.smoketracker.db.db.AppDatabase;
 import com.example.smoketracker_weber_favez.smoketracker.db.db.entity.DayEntity;
 import com.example.smoketracker_weber_favez.smoketracker.db.db.entity.HourEntity;
 import com.example.smoketracker_weber_favez.smoketracker.viewmodel.Day.DayViewModel;
 import com.example.smoketracker_weber_favez.smoketracker.viewmodel.Hour.ListHourViewModel;
-
-import org.w3c.dom.Text;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -30,7 +25,7 @@ import java.util.Map;
 
 public class History_list_data_Activity extends AppCompatActivity {
 
-    private int dayId;
+    private String dayId;
     private DayViewModel viewModel;
     private ListHourViewModel listHourViewModel;
 
@@ -63,7 +58,7 @@ public class History_list_data_Activity extends AppCompatActivity {
 
         initateView();
 
-        dayId = getIntent().getIntExtra("DayID", -1);
+        dayId = getIntent().getStringExtra("DayID");
 
         DayViewModel.Factory factoryDay = new DayViewModel.Factory(getApplication(), dayId);
         viewModel = ViewModelProviders.of(this, factoryDay).get(DayViewModel.class);

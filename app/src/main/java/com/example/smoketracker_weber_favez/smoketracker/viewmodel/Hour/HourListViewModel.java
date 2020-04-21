@@ -38,7 +38,7 @@ public class HourListViewModel extends AndroidViewModel {
         // set by default null, until we get data from the database.
         observableClients.setValue(null);
 
-        LiveData<List<HourEntity>> hours = repository.getAllHours(applicationContext);
+        LiveData<List<HourEntity>> hours = repository.getAllHours();
 
         // observe the changes of the entities from the database and forward them
         observableClients.addSource(hours, observableClients::setValue);

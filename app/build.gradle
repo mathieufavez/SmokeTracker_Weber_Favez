@@ -65,6 +65,9 @@ dependencies {
     testImplementation "androidx.room:room-testing:$room_version"
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
 
+    implementation 'com.google.firebase:firebase-auth:19.3.0'
+    implementation "com.google.firebase:firebase-database:19.2.1"
+
 }
 
 // Top-level build file where you can add configuration options common to all sub-projects/modules.

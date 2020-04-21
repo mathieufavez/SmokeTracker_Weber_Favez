@@ -36,7 +36,7 @@ public class UserListViewModel extends AndroidViewModel {
         // set by default null, until we get data from the database.
         observableClients.setValue(null);
 
-        LiveData<List<UserEntity>> users = repository.getAllUsers(applicationContext);
+        LiveData<List<UserEntity>> users = repository.getAllUsers();
 
         // observe the changes of the entities from the database and forward them
         observableClients.addSource(users, observableClients::setValue);

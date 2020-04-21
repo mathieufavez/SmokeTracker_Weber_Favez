@@ -24,7 +24,7 @@ public class DayViewModel extends AndroidViewModel {
     private final MediatorLiveData<DayEntity> observableClient;
 
     public DayViewModel(@NonNull Application application,
-                         final int id, DayRepository dayRepository) {
+                         final String id, DayRepository dayRepository) {
         super(application);
 
         repository = dayRepository;
@@ -35,7 +35,7 @@ public class DayViewModel extends AndroidViewModel {
         // set by default null, until we get data from the database.
         observableClient.setValue(null);
 
-        LiveData<DayEntity> day = repository.getOneDay(id, applicationContext);
+        LiveData<DayEntity> day = repository.getOneDay(id);
 
         // observe the changes of the client entity from the database and forward them
         observableClient.addSource(day, observableClient::setValue);
@@ -46,11 +46,11 @@ public class DayViewModel extends AndroidViewModel {
         @NonNull
         private final Application application;
 
-        private final int id;
+        private final String id;
 
         private final DayRepository repository;
 
-        public Factory(@NonNull Application application, int dayId) {
+        public Factory(@NonNull Application application, String dayId) {
             this.application = application;
             this.id = dayId;
             repository = DayRepository.getInstance();
@@ -71,15 +71,15 @@ public class DayViewModel extends AndroidViewModel {
     }
 
     public void createDay(DayEntity day, OnAsyncEventListener callback) {
-        repository.insert(day, callback, applicationContext);
+        repository.insert(day, callback);
     }
 
     public void updateDay(DayEntity day, OnAsyncEventListener callback) {
-        repository.update(day, callback, applicationContext);
+        repository.update(day, callback);
     }
 
     public void deleteDay(DayEntity day, OnAsyncEventListener callback) {
-        repository.delete(day, callback, applicationContext);
+        repository.delete(day, callback);
     }
 }
 

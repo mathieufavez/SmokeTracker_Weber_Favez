@@ -15,16 +15,13 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.smoketracker_weber_favez.R;
-import com.example.smoketracker_weber_favez.smoketracker.db.db.AppDatabase;
 import com.example.smoketracker_weber_favez.smoketracker.db.db.entity.DayEntity;
 import com.example.smoketracker_weber_favez.smoketracker.db.db.entity.UserEntity;
 import com.example.smoketracker_weber_favez.smoketracker.viewmodel.Day.DayListOneUserViewEmailModel;
-import com.example.smoketracker_weber_favez.smoketracker.viewmodel.Day.DayListOneUserViewModel;
 import com.example.smoketracker_weber_favez.smoketracker.viewmodel.User.UserViewModel;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -78,7 +75,7 @@ public class HistoryFragment extends Fragment {
     }
 
     private void declareDayFactory(){
-        DayListOneUserViewEmailModel.Factory factoryDay = new DayListOneUserViewEmailModel.Factory(getActivity().getApplication(),user.getUser_email());
+        DayListOneUserViewEmailModel.Factory factoryDay = new DayListOneUserViewEmailModel.Factory(getActivity().getApplication(),user.getId());
         dayViewModel = ViewModelProviders.of(this, factoryDay).get(DayListOneUserViewEmailModel.class);
         dayViewModel.getAllDaysForOneUser().observe(this, dayEntities -> {
             if (dayEntities!=null) {

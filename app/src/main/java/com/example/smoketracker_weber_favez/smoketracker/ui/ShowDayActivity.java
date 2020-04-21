@@ -7,7 +7,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -15,18 +14,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.smoketracker_weber_favez.R;
-import com.example.smoketracker_weber_favez.smoketracker.db.db.AppDatabase;
 import com.example.smoketracker_weber_favez.smoketracker.db.db.entity.DayEntity;
-import com.example.smoketracker_weber_favez.smoketracker.db.db.entity.UserEntity;
 import com.example.smoketracker_weber_favez.smoketracker.util.OnAsyncEventListener;
 import com.example.smoketracker_weber_favez.smoketracker.viewmodel.Day.DayViewModel;
-import com.example.smoketracker_weber_favez.smoketracker.viewmodel.User.UserViewModel;
 
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 
 public class ShowDayActivity extends AppCompatActivity {
@@ -58,7 +53,7 @@ public class ShowDayActivity extends AppCompatActivity {
 
         initiateView();
 
-        int idDay = getIntent().getIntExtra("dayId",-1);
+        String idDay = getIntent().getStringExtra("dayId");
 
         DayViewModel.Factory factory = new DayViewModel.Factory(getApplication(),idDay);
         viewModel = ViewModelProviders.of(this, factory).get(DayViewModel.class);
@@ -172,7 +167,7 @@ public class ShowDayActivity extends AppCompatActivity {
                     Integer.parseInt(cigarettesSmokedPerDay.getText().toString()),
                     Integer.parseInt(cigarettesCravedPerDay.getText().toString()),
                     Double.parseDouble(moneySpentPerDay.getText().toString()),
-                    Integer.parseInt(userId.getText().toString()),
+                    userId.getText().toString(),
                     edit_userEmail_showday.getText().toString()
 
             );
@@ -240,7 +235,7 @@ public class ShowDayActivity extends AppCompatActivity {
 
     }
 
-    private void saveChanges(Date date, int dayNumber, int cigarettesSmokedPerDay, int cigarettesCravedPerDay, double moneySpentPerDay, int userId, String userEmail) {
+    private void saveChanges(Date date, int dayNumber, int cigarettesSmokedPerDay, int cigarettesCravedPerDay, double moneySpentPerDay, String userId, String userEmail) {
 
         day.setDate(date);
         day.setDay_number(dayNumber);
@@ -286,7 +281,7 @@ public class ShowDayActivity extends AppCompatActivity {
             cigarettesSmokedPerDay.setText(Integer.toString(day.getCigarettes_smoked_per_day()));
             cigarettesCravedPerDay.setText(Integer.toString(day.getCigarettes_craved_per_day()));
             moneySpentPerDay.setText(df2.format(day.getMoney_saved_per_day()));
-            userId.setText(Integer.toString(day.getUserId()));
+            userId.setText(day.getUserId());
             edit_userEmail_showday.setText(day.getUserEmail());
         }
     }

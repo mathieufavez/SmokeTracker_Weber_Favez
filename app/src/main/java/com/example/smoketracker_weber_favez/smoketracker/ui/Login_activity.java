@@ -15,6 +15,7 @@ import android.widget.EditText;
 import com.example.smoketracker_weber_favez.R;
 import com.example.smoketracker_weber_favez.smoketracker.db.db.entity.DayEntity;
 import com.example.smoketracker_weber_favez.smoketracker.db.db.entity.UserEntity;
+import com.example.smoketracker_weber_favez.smoketracker.db.db.repository.UserRepository;
 import com.example.smoketracker_weber_favez.smoketracker.util.OnAsyncEventListener;
 import com.example.smoketracker_weber_favez.smoketracker.viewmodel.Day.DayListOneUserViewEmailModel;
 import com.example.smoketracker_weber_favez.smoketracker.viewmodel.Day.DayViewEmailModel;
@@ -37,14 +38,12 @@ public class Login_activity extends AppCompatActivity {
     private DayViewEmailModel viewEmailModel;
     private DayListOneUserViewEmailModel dayViewModel;
 
-    private UserEntity user;
     private DayEntity day;
     private int dayNumber;
 
     private Date currentTime = Calendar.getInstance().getTime();
     private Date dateFormatedCurrent;
     private Date previousDate;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,11 +88,13 @@ public class Login_activity extends AppCompatActivity {
             emailLogin.setError("This field is required");
             focusView = emailLogin;
             cancel = true;
-        } else if (!isEmailValid(email)) {
+        }
+        else if (!isEmailValid(email)) {
             emailLogin.setError("Invalid email address");
             focusView = emailLogin;
             cancel = true;
         }
+
 
         if (cancel) {
             // There was an error; don't attempt login and focus the first
@@ -147,7 +148,7 @@ public class Login_activity extends AppCompatActivity {
 
                             //If everything is good we go to the trackingActivity
                             Intent intent = new Intent(Login_activity.this, TrackingActivity.class);
-                            intent.putExtra("loggedUserEmail", userEntity.getUser_email());
+                            intent.putExtra("loggedUserEmail", userEntity.getId());
                             startActivity(intent);
                             emailLogin.setText("");
                             passwordLogin.setText("");
@@ -170,6 +171,8 @@ public class Login_activity extends AppCompatActivity {
     private boolean isEmailValid(String email) {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
+
+
 
     private void createDay(Date date, int dayNumber, int cigarettesSmoked, int cigarettesCraved, double moneySaved, String userEmail) throws ParseException {
 

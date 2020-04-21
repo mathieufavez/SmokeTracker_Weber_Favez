@@ -28,7 +28,7 @@ public class ListHourViewModel extends AndroidViewModel {
     // MediatorLiveData can observe other LiveData objects and react on their emissions.
     private final MediatorLiveData<List<HourEntity>> observableClients;
 
-    public ListHourViewModel(@NonNull Application application, final int idDay, HourRepository hourRepository) {
+    public ListHourViewModel(@NonNull Application application, final String idDay, HourRepository hourRepository) {
         super(application);
 
         repository = hourRepository;
@@ -39,7 +39,7 @@ public class ListHourViewModel extends AndroidViewModel {
         // set by default null, until we get data from the database.
         observableClients.setValue(null);
 
-        LiveData<List<HourEntity>> days = repository.getAllHoursForOneDay(idDay, applicationContext);
+        LiveData<List<HourEntity>> days = repository.getAllHoursForOneDay(idDay);
 
         // observe the changes of the entities from the database and forward them
         observableClients.addSource(days, observableClients::setValue);
@@ -53,11 +53,11 @@ public class ListHourViewModel extends AndroidViewModel {
         @NonNull
         private final Application application;
 
-        private final int idDay;
+        private final String idDay;
 
         private final HourRepository hourRepository;
 
-        public Factory(@NonNull Application application, int dayId) {
+        public Factory(@NonNull Application application, String dayId) {
             this.application = application;
             this.idDay = dayId;
             hourRepository = HourRepository.getInstance();

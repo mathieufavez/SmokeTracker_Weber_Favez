@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.example.smoketracker_weber_favez.R;
-import com.example.smoketracker_weber_favez.smoketracker.db.db.AppDatabase;
 
 public class MainActivity extends AppCompatActivity {
     private static int SPLASH_TIME_OUT = 1000;

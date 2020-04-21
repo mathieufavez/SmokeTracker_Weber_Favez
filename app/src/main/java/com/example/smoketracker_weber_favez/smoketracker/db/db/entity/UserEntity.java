@@ -1,64 +1,47 @@
 package com.example.smoketracker_weber_favez.smoketracker.db.db.entity;
 
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.ForeignKey;
-import androidx.room.Ignore;
-import androidx.room.Index;
-import androidx.room.PrimaryKey;
+import androidx.annotation.NonNull;
 
+import com.google.firebase.database.Exclude;
 
-@Entity(tableName = "users", indices = {@Index(value = {"email"}, unique = true)})
-public class UserEntity {
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
-    @PrimaryKey(autoGenerate = true)
-    private int id;
+public class UserEntity implements Comparable {
 
-    @ColumnInfo(name = "first_name")
+    private String id;
     private String user_first_name;
-
-    @ColumnInfo(name = "last_name")
     private String user_last_name;
-
-    @ColumnInfo(name = "email")
     private String user_email;
-
-    @ColumnInfo(name = "password")
     private String user_password;
-
-    @ColumnInfo(name = "brand")
     private String user_brand;
-
-    @ColumnInfo(name = "packet_price")
     private double user_packet_price;
-
-    @ColumnInfo(name = "quantity_per_packet")
     private int user_quantity_per_packet;
-
-    @ColumnInfo(name = "smoke_per_day_limit")
     private int user_smoke_per_day_limit;
+    private Date user_start_date;
 
-
-    public UserEntity( String user_first_name, String user_last_name, String user_email,String user_password, String user_brand, double user_packet_price, int user_quantity_per_packet, int user_smoke_per_day_limit) {
+    public UserEntity(String user_first_name, String user_last_name, String user_email, String user_password, String user_brand, double user_packet_price, int user_quantity_per_packet, int user_smoke_per_day_limit, Date user_start_date) {
         this.user_first_name = user_first_name;
         this.user_last_name = user_last_name;
         this.user_email = user_email;
-        this.user_password=user_password;
+        this.user_password = user_password;
         this.user_brand = user_brand;
         this.user_packet_price = user_packet_price;
         this.user_quantity_per_packet = user_quantity_per_packet;
         this.user_smoke_per_day_limit = user_smoke_per_day_limit;
+        this.user_start_date = user_start_date;
     }
 
-    @Ignore
-    public UserEntity() {
+    public UserEntity(){
+
     }
-
-
-    public int getId() {
+    @Exclude
+    public String getId() {
         return id;
     }
-    public void setId(int id) {
+
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -126,6 +109,14 @@ public class UserEntity {
         this.user_smoke_per_day_limit = user_smoke_per_day_limit;
     }
 
+    public Date getUser_start_date() {
+        return user_start_date;
+    }
+
+    public void setUser_start_date(Date user_start_date) {
+        this.user_start_date = user_start_date;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) return false;
@@ -139,5 +130,27 @@ public class UserEntity {
     public String toString() {
         return id+ " " + user_last_name + " " + user_first_name;
     }
+
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("user_first_name", user_first_name);
+        result.put("user_last_name", user_last_name);
+        result.put("user_email", user_email);
+        result.put("user_password", user_password);
+        result.put("user_brand", user_brand);
+        result.put("user_packet_price", user_packet_price);
+        result.put("user_quantity_per_packet", user_quantity_per_packet);
+        result.put("user_smoke_per_day_limit", user_smoke_per_day_limit);
+        result.put("user_start_date", user_start_date);
+        return result;
+    }
+
+    @Override
+    public int compareTo(@NonNull Object o) {
+        return toString().compareTo(o.toString());
+    }
+
+
 }
 

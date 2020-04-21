@@ -24,7 +24,7 @@ public class DayListOneUserViewModel extends AndroidViewModel {
     // MediatorLiveData can observe other LiveData objects and react on their emissions.
     private final MediatorLiveData<List<DayEntity>> observableClients;
 
-    public DayListOneUserViewModel(@NonNull Application application, final int idUser, DayRepository dayRepository) {
+    public DayListOneUserViewModel(@NonNull Application application, final String idUser, DayRepository dayRepository) {
         super(application);
 
         repository = dayRepository;
@@ -35,7 +35,7 @@ public class DayListOneUserViewModel extends AndroidViewModel {
         // set by default null, until we get data from the database.
         observableClients.setValue(null);
 
-        LiveData<List<DayEntity>> days = repository.getAllDaysForOneUser(idUser, applicationContext);
+        LiveData<List<DayEntity>> days = repository.getAllDaysForOneUser(idUser);
 
         // observe the changes of the entities from the database and forward them
         observableClients.addSource(days, observableClients::setValue);
@@ -49,11 +49,11 @@ public class DayListOneUserViewModel extends AndroidViewModel {
         @NonNull
         private final Application application;
 
-        private final int idUser;
+        private final String idUser;
 
         private final DayRepository dayRepository;
 
-        public Factory(@NonNull Application application, int userId) {
+        public Factory(@NonNull Application application, String userId) {
             this.application = application;
             this.idUser = userId;
             dayRepository = DayRepository.getInstance();
@@ -62,7 +62,7 @@ public class DayListOneUserViewModel extends AndroidViewModel {
         @Override
         public <T extends ViewModel> T create(Class<T> modelClass) {
             //noinspection unchecked
-            return (T) new DayListOneUserViewModel(application, idUser, dayRepository);
+            return (T) new DayListOneUserViewModel(application, idUser,dayRepository);
         }
     }
 

@@ -54,7 +54,7 @@ public class ShowHourActivity extends AppCompatActivity {
 
         initiateView();
 
-        int idHour = getIntent().getIntExtra("hourId",-1);
+        String idHour = getIntent().getStringExtra("hourId");
 
         HourViewModel.Factory factory = new HourViewModel.Factory(getApplication(),idHour);
         hourViewModel = ViewModelProviders.of(this, factory).get(HourViewModel.class);
@@ -148,7 +148,7 @@ public class ShowHourActivity extends AppCompatActivity {
             saveChanges(
                     formatedDate,
                     edit_description_showhour.getText().toString(),
-                    Integer.parseInt(edit_dayId_showhour.getText().toString())
+                    edit_dayId_showhour.getText().toString()
             );
 
             edit_hour_input.setFocusable(false);
@@ -164,7 +164,7 @@ public class ShowHourActivity extends AppCompatActivity {
         isEditable = !isEditable;
     }
 
-    private void saveChanges(Date heure, String description, int dayId) {
+    private void saveChanges(Date heure, String description, String dayId) {
 
         hour.setHour(heure);
         hour.setDescription(description);
@@ -204,7 +204,7 @@ public class ShowHourActivity extends AppCompatActivity {
         if (hour!=null) {
             edit_hour_input.setText(formatedDate);
             edit_description_showhour.setText(hour.getDescription());
-            edit_dayId_showhour.setText(Integer.toString(hour.getIdDay()));
+            edit_dayId_showhour.setText(hour.getIdDay());
         }
     }
 

@@ -47,7 +47,7 @@ public class CreateHourActivity extends AppCompatActivity {
                     createDay(
                             formatedHour,
                             edit_description_showhour.getText().toString(),
-                            Integer.parseInt(edit_dayId_showhour.getText().toString())
+                            edit_dayId_showhour.getText().toString()
                     );
                 } catch (ParseException e) {
                     e.printStackTrace();
@@ -56,7 +56,7 @@ public class CreateHourActivity extends AppCompatActivity {
         });
     }
 
-    private void createDay(Date heure, String description, int dayId) {
+    private void createDay(Date heure, String description, String dayId) {
         HourViewModel.Factory factory = new HourViewModel.Factory(getApplication(), dayId);
         viewModel = ViewModelProviders.of(this, factory).get(HourViewModel.class);
 

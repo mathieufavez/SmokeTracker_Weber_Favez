@@ -76,8 +76,8 @@ public class StatsFragment extends Fragment {
         avgcraved_value = view.findViewById(R.id.avgcraved_value);
     }
 
-    private void declareDayFactory(int userId){
-        DayListOneUserViewEmailModel.Factory factoryDay = new DayListOneUserViewEmailModel.Factory(getActivity().getApplication(),userEmailLogged);
+    private void declareDayFactory(String userId){
+        DayListOneUserViewEmailModel.Factory factoryDay = new DayListOneUserViewEmailModel.Factory(getActivity().getApplication(),userId);
         dayViewModel = ViewModelProviders.of(this, factoryDay).get(DayListOneUserViewEmailModel.class);
         dayViewModel.getAllDaysForOneUser().observe(this, dayEntities -> {
             if (dayEntities!=null) {

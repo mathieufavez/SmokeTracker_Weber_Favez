@@ -18,8 +18,9 @@ import com.example.smoketracker_weber_favez.smoketracker.db.db.entity.HourEntity
 import com.example.smoketracker_weber_favez.smoketracker.db.db.entity.UserEntity;
 import com.example.smoketracker_weber_favez.smoketracker.util.OnAsyncEventListener;
 import com.example.smoketracker_weber_favez.smoketracker.viewmodel.Day.DayListOneUserViewEmailModel;
+import com.example.smoketracker_weber_favez.smoketracker.viewmodel.Day.DayListViewModel;
 import com.example.smoketracker_weber_favez.smoketracker.viewmodel.Day.DaySpecificViewModel;
-import com.example.smoketracker_weber_favez.smoketracker.viewmodel.Day.DayViewEmailModel;
+import com.example.smoketracker_weber_favez.smoketracker.viewmodel.Day.DayViewModel;
 import com.example.smoketracker_weber_favez.smoketracker.viewmodel.Hour.HourViewModel;
 import com.example.smoketracker_weber_favez.smoketracker.viewmodel.User.UserViewModel;
 
@@ -49,6 +50,7 @@ public class TrackingFragment extends Fragment {
 
     private UserViewModel userViewModel;
     private DayListOneUserViewEmailModel dayViewModel;
+    private DayListViewModel dayViewModel2;
     private HourViewModel hourViewModel;
     private DaySpecificViewModel daySpecificViewModel;
 
@@ -129,6 +131,7 @@ public class TrackingFragment extends Fragment {
 
                 hour.setHour(formatedOk);
                 hour.setDescription("Craved");
+                hour.setIdDay(days.get(days.size()-1).getId());
 
                 hourViewModel.createHour(hour, new OnAsyncEventListener() {
                     @Override
@@ -146,7 +149,7 @@ public class TrackingFragment extends Fragment {
 
 
 
-        DayListOneUserViewEmailModel.Factory factoryDay = new DayListOneUserViewEmailModel.Factory(getActivity().getApplication(), user.getUser_email());
+        DayListOneUserViewEmailModel.Factory factoryDay = new DayListOneUserViewEmailModel.Factory(getActivity().getApplication(), user.getId());
         dayViewModel = ViewModelProviders.of(this, factoryDay).get(DayListOneUserViewEmailModel.class);
         dayViewModel.getAllDaysForOneUser().observe(this, dayEntities -> {
             if (dayEntities != null) {
@@ -197,6 +200,7 @@ public class TrackingFragment extends Fragment {
 
             hour.setHour(formatedOk);
             hour.setDescription("Smoked");
+            hour.setIdDay(days.get(days.size()-1).getId());
 
             hourViewModel.createHour(hour, new OnAsyncEventListener() {
                 @Override
@@ -213,7 +217,7 @@ public class TrackingFragment extends Fragment {
         });
 
         cigaretteLimit -= 1;
-        DayListOneUserViewEmailModel.Factory factoryDay = new DayListOneUserViewEmailModel.Factory(getActivity().getApplication(), user.getUser_email());
+        DayListOneUserViewEmailModel.Factory factoryDay = new DayListOneUserViewEmailModel.Factory(getActivity().getApplication(), user.getId());
         dayViewModel = ViewModelProviders.of(this, factoryDay).get(DayListOneUserViewEmailModel.class);
         dayViewModel.getAllDaysForOneUser().observe(this, dayEntities -> {
             if (dayEntities != null) {
@@ -250,16 +254,16 @@ public class TrackingFragment extends Fragment {
     }
 
     private void declareDayFactory() {
-        DayListOneUserViewEmailModel.Factory factoryDay = new DayListOneUserViewEmailModel.Factory(getActivity().getApplication(), user.getUser_email());
-        dayViewModel = ViewModelProviders.of(this, factoryDay).get(DayListOneUserViewEmailModel.class);
-        dayViewModel.getAllDaysForOneUser().observe(this, dayEntities -> {
+        DayListViewModel.Factory factoryDay = new DayListViewModel.Factory(getActivity().getApplication());
+        dayViewModel2 = ViewModelProviders.of(this, factoryDay).get(DayListViewModel.class);
+        dayViewModel2.getAllDays().observe(this, dayEntities -> {
             if (dayEntities != null) {
                 days = dayEntities;
-                day_textView.setText("Day " + Integer.toString(days.get(days.size() - 1).getDay_number()));
+                day_textView.setText("Day " + Integer.toString(days.get(days.size()-1).getDay_number()));
                 x_cigarettes_left_textView.setText(Integer.toString(cigaretteLimit));
-                smoked_value.setText(Integer.toString(days.get(days.size() - 1).getCigarettes_smoked_per_day()));
-                craved_value.setText(Integer.toString(days.get(days.size() - 1).getCigarettes_craved_per_day()));
-                money_spent_value.setText(df2.format(days.get(days.size() - 1).getMoney_saved_per_day()));
+                smoked_value.setText(Integer.toString(days.get(days.size()-1).getCigarettes_smoked_per_day()));
+                craved_value.setText(Integer.toString(days.get(days.size()-1).getCigarettes_craved_per_day()));
+                money_spent_value.setText(df2.format(days.get(days.size()-1).getMoney_saved_per_day()));
             }
         });
     }

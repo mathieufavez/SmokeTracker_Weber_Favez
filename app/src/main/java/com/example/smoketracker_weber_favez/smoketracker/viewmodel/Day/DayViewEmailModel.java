@@ -35,7 +35,7 @@ public class DayViewEmailModel extends AndroidViewModel {
         // set by default null, until we get data from the database.
         observableClient.setValue(null);
 
-        LiveData<DayEntity> day = repository.getOneDayWithEmail(email, applicationContext);
+        LiveData<DayEntity> day = repository.getOneDayWithEmail(email);
 
         // observe the changes of the client entity from the database and forward them
         observableClient.addSource(day, observableClient::setValue);
@@ -71,15 +71,15 @@ public class DayViewEmailModel extends AndroidViewModel {
     }
 
     public void createDay(DayEntity day, OnAsyncEventListener callback) {
-        repository.insert(day, callback, applicationContext);
+        repository.insert(day, callback);
     }
 
     public void updateDay(DayEntity day, OnAsyncEventListener callback) {
-        repository.update(day, callback, applicationContext);
+        repository.update(day, callback);
     }
 
     public void deleteDay(DayEntity day, OnAsyncEventListener callback) {
-        repository.delete(day, callback, applicationContext);
+        repository.delete(day, callback);
     }
 }
 

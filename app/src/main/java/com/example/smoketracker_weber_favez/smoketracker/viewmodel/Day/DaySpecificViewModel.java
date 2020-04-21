@@ -24,7 +24,7 @@ public class DaySpecificViewModel extends AndroidViewModel {
     private final MediatorLiveData<DayEntity> observableClient;
 
     public DaySpecificViewModel(@NonNull Application application,
-                             final String email, final int dayId, DayRepository dayRepository) {
+                             final String email, final String dayId, DayRepository dayRepository) {
         super(application);
 
         repository = dayRepository;
@@ -35,7 +35,7 @@ public class DaySpecificViewModel extends AndroidViewModel {
         // set by default null, until we get data from the database.
         observableClient.setValue(null);
 
-        LiveData<DayEntity> day = repository.getOneDaySpecific(email,dayId, applicationContext);
+        LiveData<DayEntity> day = repository.getOneDaySpecific(email,dayId);
 
         // observe the changes of the client entity from the database and forward them
         observableClient.addSource(day, observableClient::setValue);
@@ -48,11 +48,11 @@ public class DaySpecificViewModel extends AndroidViewModel {
 
         private final String email;
 
-        private final int id;
+        private final String id;
 
         private final DayRepository repository;
 
-        public Factory(@NonNull Application application, String userEmail, int idDay) {
+        public Factory(@NonNull Application application, String userEmail, String idDay) {
             this.application = application;
             this.email = userEmail;
             this.id = idDay;
@@ -75,15 +75,15 @@ public class DaySpecificViewModel extends AndroidViewModel {
     }
 
     public void createDay(DayEntity day, OnAsyncEventListener callback) {
-        repository.insert(day, callback, applicationContext);
+        repository.insert(day, callback);
     }
 
     public void updateDay(DayEntity day, OnAsyncEventListener callback) {
-        repository.update(day, callback, applicationContext);
+        repository.update(day, callback);
     }
 
     public void deleteDay(DayEntity day, OnAsyncEventListener callback) {
-        repository.delete(day, callback, applicationContext);
+        repository.delete(day, callback);
     }
 }
 

@@ -27,7 +27,7 @@ public class HourViewModel extends AndroidViewModel {
     private final MediatorLiveData<HourEntity> observableClient;
 
     public HourViewModel(@NonNull Application application,
-                        final int idDay, HourRepository hourRepository) {
+                        final String idDay, HourRepository hourRepository) {
         super(application);
 
         repository = hourRepository;
@@ -38,7 +38,7 @@ public class HourViewModel extends AndroidViewModel {
         // set by default null, until we get data from the database.
         observableClient.setValue(null);
 
-        LiveData<HourEntity> day = repository.getOneHour(idDay, applicationContext);
+        LiveData<HourEntity> day = repository.getOneHour(idDay);
 
         // observe the changes of the client entity from the database and forward them
         observableClient.addSource(day, observableClient::setValue);
@@ -49,11 +49,11 @@ public class HourViewModel extends AndroidViewModel {
         @NonNull
         private final Application application;
 
-        private final int id;
+        private final String id;
 
         private final HourRepository repository;
 
-        public Factory(@NonNull Application application, int hourId) {
+        public Factory(@NonNull Application application, String hourId) {
             this.application = application;
             this.id = hourId;
             repository = HourRepository.getInstance();
@@ -72,14 +72,14 @@ public class HourViewModel extends AndroidViewModel {
     }
 
     public void createHour(HourEntity hour, OnAsyncEventListener callback) {
-        repository.insert(hour, callback, applicationContext);
+        repository.insert(hour, callback);
     }
 
     public void updateHour(HourEntity hour, OnAsyncEventListener callback) {
-        repository.update(hour, callback, applicationContext);
+        repository.update(hour, callback);
     }
 
     public void deleteHour(HourEntity hour, OnAsyncEventListener callback) {
-        repository.delete(hour, callback, applicationContext);
+        repository.delete(hour, callback);
     }
 }

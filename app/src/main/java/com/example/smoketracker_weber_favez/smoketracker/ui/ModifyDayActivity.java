@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
@@ -16,13 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smoketracker_weber_favez.R;
 import com.example.smoketracker_weber_favez.smoketracker.adapter.DayRecyclerAdapter;
-import com.example.smoketracker_weber_favez.smoketracker.adapter.RecyclerAdapter;
-import com.example.smoketracker_weber_favez.smoketracker.db.db.AppDatabase;
 import com.example.smoketracker_weber_favez.smoketracker.db.db.entity.DayEntity;
-import com.example.smoketracker_weber_favez.smoketracker.db.db.entity.UserEntity;
 import com.example.smoketracker_weber_favez.smoketracker.util.RecyclerViewItemClickListener;
 import com.example.smoketracker_weber_favez.smoketracker.viewmodel.Day.DayListViewModel;
-import com.example.smoketracker_weber_favez.smoketracker.viewmodel.User.UserListViewModel;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -35,7 +35,7 @@ public class DayListViewModel extends AndroidViewModel {
         // set by default null, until we get data from the database.
         observableClients.setValue(null);
 
-        LiveData<List<DayEntity>> users = repository.getAllDays(applicationContext);
+        LiveData<List<DayEntity>> users = repository.getAllDays();
 
         // observe the changes of the entities from the database and forward them
         observableClients.addSource(users, observableClients::setValue);

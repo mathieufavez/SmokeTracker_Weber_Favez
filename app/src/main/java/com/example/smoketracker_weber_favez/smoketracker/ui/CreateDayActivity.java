@@ -63,11 +63,7 @@ public class CreateDayActivity extends AppCompatActivity {
         DayViewEmailModel.Factory factory = new DayViewEmailModel.Factory(getApplication(), emailUser);
         viewModel = ViewModelProviders.of(this, factory).get(DayViewEmailModel.class);
 
-        try {
-            day = new DayEntity();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        day = new DayEntity();
         day.setDate(date);
         day.setDay_number(dayNbr);
         day.setCigarettes_smoked_per_day(cigarettesSmoked);

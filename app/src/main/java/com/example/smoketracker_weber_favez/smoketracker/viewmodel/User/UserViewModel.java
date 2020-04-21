@@ -10,7 +10,6 @@ import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.smoketracker_weber_favez.smoketracker.db.db.AppDatabase;
 import com.example.smoketracker_weber_favez.smoketracker.db.db.entity.UserEntity;
 import com.example.smoketracker_weber_favez.smoketracker.db.db.repository.UserRepository;
 import com.example.smoketracker_weber_favez.smoketracker.util.OnAsyncEventListener;
@@ -37,7 +36,7 @@ public class UserViewModel extends AndroidViewModel {
         // set by default null, until we get data from the database.
         observableClient.setValue(null);
 
-        LiveData<UserEntity> user = repository.getUser(email, applicationContext);
+        LiveData<UserEntity> user = repository.getUser(email);
 
         //observe the changes of the client entity from the database and forward them
         observableClient.addSource(user, observableClient::setValue);
@@ -73,20 +72,21 @@ public class UserViewModel extends AndroidViewModel {
     }
 
 
-    public int getIdUserByEmail(String email, Context context) {
+    /*public int getIdUserByEmail(String email, Context context) {
         return repository.getIdUserByEmail(email, context);
-    }
+    }*/
 
-    public void createUser(UserEntity user, OnAsyncEventListener callback) {
-        repository.insert(user, callback, applicationContext);
+    public String createUser(UserEntity user, OnAsyncEventListener callback) {
+       String id =  repository.insert(user, callback);
+       return id;
     }
 
     public void updateUser(UserEntity user, OnAsyncEventListener callback) {
-        repository.update(user, callback, applicationContext);
+        repository.update(user, callback);
     }
 
     public void deleteUser(UserEntity user, OnAsyncEventListener callback) {
-        repository.delete(user, callback, applicationContext);
+        repository.delete(user, callback);
     }
 }
 

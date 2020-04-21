@@ -9,13 +9,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.smoketracker_weber_favez.R;
 import com.example.smoketracker_weber_favez.smoketracker.db.db.entity.DayEntity;
 import com.example.smoketracker_weber_favez.smoketracker.db.db.entity.UserEntity;
+import com.example.smoketracker_weber_favez.smoketracker.db.db.repository.UserRepository;
 import com.example.smoketracker_weber_favez.smoketracker.util.OnAsyncEventListener;
 import com.example.smoketracker_weber_favez.smoketracker.viewmodel.Day.DayViewEmailModel;
-import com.example.smoketracker_weber_favez.smoketracker.viewmodel.Day.DayViewModel;
 import com.example.smoketracker_weber_favez.smoketracker.viewmodel.User.UserViewModel;
 
 import java.text.ParseException;
@@ -40,7 +41,9 @@ public class HomeActivity extends AppCompatActivity {
 
     private UserViewModel userViewModel;
     private DayViewEmailModel dayViewModel;
-    private DayViewModel viewModel;
+
+    private String idUser;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,7 +119,8 @@ public class HomeActivity extends AppCompatActivity {
             email.setError("This field is required");
             focusView = email;
             cancel = true;
-        } else if (!isEmailValid(emailS)) {
+        }
+        else if (!isEmailValid(emailS)) {
             email.setError("Invalid email address");
             focusView = email;
             cancel = true;
@@ -143,34 +147,38 @@ public class HomeActivity extends AppCompatActivity {
 
             //Then we go to the TrackingActivity and we pass it the email of the user
             Intent intent = new Intent(HomeActivity.this, TrackingActivity.class);
-            intent.putExtra("loggedUserEmail", email.getText().toString());
+            intent.putExtra("loggedUserEmail", idUser);
             startActivity(intent);
         }
     }
 
-
     //Create an user
-    private void createUser(String lastName, String firstName, String email, String password, String brand, double packetPrice, int quantityPerPacket, int cigarettesSmokedPerDay) {
+    private void createUser(String lastName, String firstName, String email, String password, String brand, double packetPrice, int quantityPerPacket, int cigarettesSmokedPerDay) throws ParseException {
+
+        String formatedDate = new SimpleDateFormat("dd-MM-yyyy").format(currentTime);
+        Date dateFromated = new SimpleDateFormat("dd-MM-yyyy").parse(formatedDate);
 
         user = new UserEntity();
         user.setUser_last_name(lastName);
         user.setUser_first_name(firstName);
         user.setUser_email(email);
         user.setUser_password(password);
+        user.setUser_password(password);
         user.setUser_brand(brand);
         user.setUser_packet_price(packetPrice);
         user.setUser_quantity_per_packet(quantityPerPacket);
         user.setUser_smoke_per_day_limit(cigarettesSmokedPerDay);
+        user.setUser_start_date(dateFromated);
 
-        userViewModel.createUser(user, new OnAsyncEventListener() {
+        idUser = userViewModel.createUser(user, new OnAsyncEventListener() {
             @Override
             public void onSuccess() {
-                Log.d(TAG, "createClient: success");
+                Log.d(TAG, "createUserWithEmail: success");
             }
 
             @Override
             public void onFailure(Exception e) {
-                Log.e(TAG, "createClient: failure", e);
+                Log.d(TAG, "createUserWithEmail: failure", e);
             }
         });
     }
@@ -212,9 +220,9 @@ public class HomeActivity extends AppCompatActivity {
             email.setText(user.getUser_email());
             password.setText(user.getUser_password());
             brand.setText(user.getUser_brand());
-            packetPrice.setText((int) user.getUser_packet_price());
+           /* packetPrice.setText((int) user.getUser_packet_price());
             quantityPerPacket.setText(user.getUser_quantity_per_packet());
-            cigarettesSmokedPerDay.setText(user.getUser_smoke_per_day_limit());
+            cigarettesSmokedPerDay.setText(user.getUser_smoke_per_day_limit());*/
         }
     }
 
@@ -227,4 +235,5 @@ public class HomeActivity extends AppCompatActivity {
     private boolean isPasswordValid(String password) {
         return password.length() > 5;
     }
+
 }
